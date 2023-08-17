@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+	wood:  <div id="wood">0</div><br>
+	stone: <div id="stone">0</div><br>
+	metal: <div id="metal">0</div><br><br>
+	<input type="submit" onclick="mine()">
+</body>
+</html>
+
+
+<style type="text/css">
+	div {
+		display: inline;
+	}
+</style>
+
+
+<script type="text/javascript" src="utils.js"></script>
+<script type="text/javascript">
+	
+	let wood = 0
+	let stone = 0
+	let metal = 0
+
+	function mine() {
+		const generate = random(100)
+		if (generate <= 50) {
+			console.log("wood")
+			updateRss("wood", wood += 1)
+		} else if (generate <= 80) {
+		  	console.log("stone")
+		  	updateRss("stone", stone += 1)
+		}
+		  else if (generate <= 100) {
+		  	console.log("metal")
+		  	updateRss("metal", metal += 1)
+		  	
+		}
+	}
+
+	function updateRss(id, value) {
+		const element = document.getElementById(id)
+		element.innerHTML = value
+	}
+
+</script>
