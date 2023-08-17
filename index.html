@@ -6,14 +6,16 @@
 	<title></title>
 </head>
 <body>
-	wood:  <div id="wood">0</div><br>
-	stone: <div id="stone">0</div><br>
-	metal: <div id="metal">0</div><br><br>
-	<input type="submit" onclick="mine()">
+	wood:  <div id="wood">0</div>&emsp;&emsp;wood skill: <div id="woodSkill">0</div><br>
+	stone: <div id="stone">0</div>&emsp;&emsp;stone skill: <div id="stoneSkill">0</div><br>
+	metal: <div id="metal">0</div>&emsp;&emsp;metal skill: <div id="metalSkill">0</div><br><br>
+	<button onclick="mine()">MINE</button>
+
+	<div id="status"></div>
 </body>
 </html>
 
-
+ 
 <style type="text/css">
 	div {
 		display: inline;
@@ -23,30 +25,117 @@
 
 <script type="text/javascript" src="utils.js"></script>
 <script type="text/javascript">
+
+	const WOOD_CHANCE = 50
+	const STONE_CHANCE = 30
+	const METAL_CHANCE = 20
+
+	const ONE_CHANCE = 50
+	const TWO_CHANCE = 25
+	const THREE_CHANCE = 10
+
+	const MINE_CHANCE = 40
+
+	const ONE_RATE = ONE_CHANCE
+	const TWO_RATE = ONE_CHANCE + TWO_CHANCE
+	const THREE_RATE = ONE_CHANCE + TWO_CHANCE + THREE_CHANCE
+
+	const WOOD_RATE = WOOD_CHANCE
+	const STONE_RATE = WOOD_CHANCE + STONE_CHANCE
+	const METAL_RATE = WOOD_CHANCE + STONE_CHANCE + METAL_CHANCE
 	
 	let wood = 0
 	let stone = 0
 	let metal = 0
 
+	const skillPoints = [5, 8, 10, 13, 15, 20, 25, 30, 35, 50]
+
+	// Game logic
 	function mine() {
-		const generate = random(100)
-		if (generate <= 50) {
-			console.log("wood")
-			updateRss("wood", wood += 1)
-		} else if (generate <= 80) {
-		  	console.log("stone")
-		  	updateRss("stone", stone += 1)
+		const count = rssToMine() 
+		const name = rssName()
+		let mined
+		if (name == "wood") {
+			mined = rssMined(skillLevel(wood))
+		} else if (name == "stone") {
+			mined = rssMined(skillLevel(stone))
+		} else {
+			mined = rssMined(skillLevel(metal))
 		}
-		  else if (generate <= 100) {
-		  	console.log("metal")
-		  	updateRss("metal", metal += 1)
-		  	
+
+		if (mined) {
+			updateStatus('mined ' + count + ' ' + name)
+			if (name == "wood") {
+				updateRss(name, wood += count)
+			} else if (name == "stone") {
+				updateRss(name, stone += count)
+			} else {
+				updateRss(name, metal += count)
+			}
+		} else {
+			updateStatus('failed to mine ' + count + ' ' + name)
+		}
+		
+	}
+	function rssName() {
+		const generate = random(WOOD_CHANCE + STONE_CHANCE + METAL_CHANCE)
+		if (generate <= WOOD_RATE) {
+			return "wood"
+		} else if (generate <= STONE_RATE) {
+			return 'stone'
+		} else if (generate <= METAL_RATE) {
+			return 'metal'
 		}
 	}
 
+	function rssToMine() {
+		const generate = random(ONE_CHANCE + TWO_CHANCE + THREE_CHANCE) 
+		if (generate <= ONE_RATE) {
+			return 1
+		} else if (generate <= TWO_RATE) {
+			return 2
+		} else if (generate <= THREE_RATE) {
+			return 3
+		}
+	}
+
+	function rssMined(level) {
+		const bonus = level*5
+		return random(100) <= (MINE_CHANCE + bonus)
+	}
+
+	// HTML 
 	function updateRss(id, value) {
 		const element = document.getElementById(id)
 		element.innerHTML = value
+		updateRssSkill(id)		
+	}
+
+	function updateStatus(msg) {
+		const element = document.getElementById("status")
+		element.innerHTML = msg
+	}
+
+	function updateRssSkill(rssName) {
+		let element = document.getElementById("woodSkill")
+		element.innerHTML = skillLevel(wood)
+
+		element = document.getElementById("stoneSkill")
+		element.innerHTML = skillLevel(stone)
+
+		element = document.getElementById("metalSkill")
+		element.innerHTML = skillLevel(metal)
+	}
+	
+	function skillLevel(skill) {
+		for (idx in skillPoints) {
+			const n = skillPoints[idx]
+			skill -= n 
+			if (skill < 0 ) {
+				return idx
+			}
+		}
+		return skillPoints.length-1
 	}
 
 </script>
