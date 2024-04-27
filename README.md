@@ -5,9 +5,10 @@
 + chance to mine
 + mine skill impove
 + skill stats
-
-- shop (forge)
-- craft
++ shop (forge)
++ craft
+- fix mine bug (rss count is not udated)
+- fix craft bug (rss name wrong)
 - inventory
 - mobs
 - mob drop
