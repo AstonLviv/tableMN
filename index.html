@@ -6,15 +6,24 @@
 	<title></title>
 </head>
 <body>
-	wood:  <div id="wood">0</div>&emsp;&emsp;wood skill: <div id="woodSkill">0</div><br>
-	stone: <div id="stone">0</div>&emsp;&emsp;stone skill: <div id="stoneSkill">0</div><br>
-	metal: <div id="metal">0</div>&emsp;&emsp;metal skill: <div id="metalSkill">0</div><br><br>
-	<button onclick="mine()">MINE</button>
-	<div id="status"></div>
-	<br><br>
-	<div id="craft">CRAFT:<br>
+	<div class="row">
+  		<div class="column" style="background-color:#fff;">
+  			wood:  <div id="wood">0</div>&emsp;&emsp;wood skill: <div id="woodSkill">0</div><br>
+			stone: <div id="stone">0</div>&emsp;&emsp;stone skill: <div id="stoneSkill">0</div><br>
+			metal: <div id="metal">0</div>&emsp;&emsp;metal skill: <div id="metalSkill">0</div><br><br>
+			<button onclick="mine()">MINE</button>
+			<div id="status"></div>
+			<br><br>
+			<div id="craft">CRAFT:<br>
+			</div>
+  		</div>
+  		<div class="column" style="background-color:#fff;">
+    		<h2>INVENTORY:</h2>
+    		<div id="inventory"><br>
+			</div>
+  		</div>
 	</div>
-	
+
 </body>
 </html>
 
@@ -26,6 +35,21 @@
 	button {
 		width: 150px;
 		margin: 5px;
+	}
+	* {
+	  box-sizing: border-box;
+	}
+
+	.column {
+	  float: left;
+	  width: 20%;
+	  padding: 10px;
+	}
+
+	.row:after {
+	  content: "";
+	  display: table;
+	  clear: both;
 	}
 </style>
 

@@ -136,6 +136,7 @@
 				wagonOwned = true
 			}
 		}
+		updateInventory()
 	}
 
 	function consumeRss(price) {

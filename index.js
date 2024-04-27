@@ -77,3 +77,21 @@
 		}
 		return result
 	}
+
+	function updateInventory() {
+		const inventElement = document.getElementById('inventory')
+		inventElement.innerHTML = ""
+		for (tool of tools) {
+			if (tool.owned == false) continue
+
+			const descriptionElement = document.createElement("div")
+			descriptionElement.textContent = ' ' + tool.description
+
+			const nameElement = document.createElement('div')
+			nameElement.textContent = tool.name
+
+			inventElement.appendChild(nameElement)
+			inventElement.appendChild(descriptionElement)
+			inventElement.appendChild(document.createElement('br'))    		
+		}
+	}
