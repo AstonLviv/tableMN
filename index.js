@@ -18,6 +18,26 @@
 		}
 	}
 
+	function updatePlayerStats() {
+		const element = document.getElementById("hp")
+		element.innerHTML = "hp"
+	}
+
+	function drawMob(mob) {
+		const mobElement = document.getElementById('fighting')
+		mobElement.innerHTML = ""
+		const nameElement = document.createElement('div')
+		nameElement.innerText = mob.name
+		mobElement.appendChild(nameElement)
+	}
+
+	function showBattle() {
+		const hideUi = document.getElementById('main')
+		hideUi.style.display = "none"
+		const showUi = document.getElementById('battle')
+		showUi.style.display = "block"
+	}
+
 	function updateRssSkill(rssName) {
 		let element = document.getElementById("woodSkill")
 		element.innerHTML = skillLevel(woodLvl)

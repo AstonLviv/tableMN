@@ -6,7 +6,10 @@
 	<title></title>
 </head>
 <body>
-	<div class="row">
+	<div id='battle' class="floating center" style="display:none;">
+		hp
+	</div>
+	<div id="main">
   		<div class="column" style="background-color:#fff;">
   			wood:  <div id="wood">0</div>&emsp;&emsp;wood skill: <div id="woodSkill">0</div><br>
 			stone: <div id="stone">0</div>&emsp;&emsp;stone skill: <div id="stoneSkill">0</div><br>
@@ -26,9 +29,14 @@
     		<h2>MOBS:</h2>
     		<div id="fighting"><br>
     		</div>
+			<button onclick="fight()">fight</button>
+		</div>
+		<div class="column" style="background-color:#fff;">
+    		<h2>HP:</h2>
+    		<div id="hp"><br>
+			</div>
 		</div>
 	</div>
-
 </body>
 </html>
 
@@ -56,11 +64,22 @@
 	  display: table;
 	  clear: both;
 	}
+	.floating {
+		position: relative;
+		width: 90%;
+		padding: 10px 5%;
+		background: lightgrey;
+		transition: all 1.3s ease;
+		animation: float 1.5s ease-in-out 0s infinite forwards;
+	}
+	.center {
+		text-align: center;
+	}
 </style>
 
 
 <script type="text/javascript" src="utils.js"></script>
 <script type="text/javascript" src="craft.js"></script>
-
+<script type="text/javascript" src="mobs.js"></script>
 <script type="text/javascript" src="index.js"></script>
 <script type="text/javascript" src="gameLogic.js"></script>

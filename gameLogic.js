@@ -3,6 +3,10 @@
 	let metal = 0
 
 	updateCraft()
+	let currentMob = mobs[0]
+	let playerHp = 5
+	drawMob(currentMob)
+	updatePlayerStats()
 
 	const WOOD_CHANCE = 50
 	const STONE_CHANCE = 30
@@ -73,6 +77,11 @@
 			updateStatus('failed to mine ' + count + ' ' + name)
 			setStatusRed(true)
 		}
+	}
+
+	function fight() {
+		showBattle()
+
 	}
 
 	function rssName() {
