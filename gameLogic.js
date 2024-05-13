@@ -5,9 +5,13 @@
 	updateCraft()
 	let currentMob = mobs[0]
 	let playerHp = 5
+	let maxPlayerHp = 5
 	drawMob(currentMob)
 	updatePlayerStats()
 
+	let currentTurn = 1
+	let alreadyMined = false
+	
 	const WOOD_CHANCE = 50
 	const STONE_CHANCE = 30
 	const METAL_CHANCE = 20
@@ -38,13 +42,20 @@
 	let wagonOwned = false
 
 	const skillPointsForLevel = [5, 8, 10, 13, 15, 20, 25, 30, 35, 50]
-
+	function randomMob() {
+		const mobsCount = mobs.length
+		return random(mobs)
+	}
 	function mine() {
-		console.log("mined 1")
+		alreadyMined = true
+		enableButton("mineButton", false)
+		if ( playerHp != maxPlayerHp) {
+			playerHp += 1
+		}
+		updatePlayerStats()
 		let count = rssCountToMine() 
 		const name = rssName()
 		let mined = false
-		console.log("mined 2")
 		if (name == "wood") {
 			mined = isRssMined(skillLevel(woodLvl), woodBonusChance)
 		} else if (name == "stone") {
@@ -155,4 +166,10 @@
 		updateRss("stone", stone)
 		metal = metal - price[2]
 		updateRss("metal", metal)
+	}
+
+	function endTurn() {
+		currentTurn++
+		updateTurn(currentTurn)
+		enableButton("mineButton", true)
 	}

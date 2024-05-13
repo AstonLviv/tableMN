@@ -20,7 +20,7 @@
 
 	function updatePlayerStats() {
 		const element = document.getElementById("hp")
-		element.innerHTML = "hp"
+		element.innerHTML = playerHp
 	}
 
 	function drawMob(mob) {
@@ -29,6 +29,13 @@
 		const nameElement = document.createElement('div')
 		nameElement.innerText = mob.name
 		mobElement.appendChild(nameElement)
+		const mobHpElement = document.createElement('div')
+		mobHpElement.innerText = mob.hp
+		mobElement.appendChild(document.createElement("br"))
+		const hpLabelElement = document.createElement('div')
+		hpLabelElement.innerHTML = "HP: "
+		mobElement.appendChild(hpLabelElement)
+		mobElement.appendChild(mobHpElement)
 	}
 
 	function showBattle() {
@@ -114,4 +121,13 @@
 			inventElement.appendChild(descriptionElement)
 			inventElement.appendChild(document.createElement('br'))    		
 		}
+	}
+	
+ 	function updateTurn(turn) {
+		const turnElement = document.getElementById("turn")
+		turnElement.textContent = turn
+	}
+
+	function enableButton(elementId, enable) {
+		document.getElementById(elementId).disabled = !enable
 	}

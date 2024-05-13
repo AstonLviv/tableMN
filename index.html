@@ -6,6 +6,7 @@
 	<title></title>
 </head>
 <body>
+	
 	<div id='battle' class="floating center" style="display:none;">
 		hp
 	</div>
@@ -14,26 +15,35 @@
   			wood:  <div id="wood">0</div>&emsp;&emsp;wood skill: <div id="woodSkill">0</div><br>
 			stone: <div id="stone">0</div>&emsp;&emsp;stone skill: <div id="stoneSkill">0</div><br>
 			metal: <div id="metal">0</div>&emsp;&emsp;metal skill: <div id="metalSkill">0</div><br><br>
-			<button onclick="mine()">MINE</button>
+			<button onclick="mine()" id="mineButton">MINE</button>
 			<div id="status"></div>
-			<br><br>
-			<div id="craft">CRAFT:<br>
+			<br><br>CRAFT:<br>
+			<div id="craft">
 			</div>
   		</div>
   		<div class="column" style="background-color:#fff;">
     		<h2>INVENTORY:</h2>
-    		<div id="inventory"><br>
+    		<div id="inventory">
 			</div>
   		</div>
   		<div class="column" style="background-color:#fff;">
     		<h2>MOBS:</h2>
-    		<div id="fighting"><br>
+    		<div id="fighting">
     		</div>
 			<button onclick="fight()">fight</button>
 		</div>
 		<div class="column" style="background-color:#fff;">
     		<h2>HP:</h2>
     		<div id="hp"><br>
+			</div>
+		</div>
+		<div class="column">
+			<button onclick="endTurn()">
+				end turn
+			</button> <br> 
+			Turn:
+			<div id="turn">
+				1
 			</div>
 		</div>
 	</div>
