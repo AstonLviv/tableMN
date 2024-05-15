@@ -3,7 +3,7 @@
 	let metal = 0
 
 	updateCraft()
-	let currentMob = mobs[0]
+	let currentMob = randomMob()
 	let playerHp = 5
 	let maxPlayerHp = 5
 	drawMob(currentMob)
@@ -172,4 +172,11 @@
 		currentTurn++
 		updateTurn(currentTurn)
 		enableButton("mineButton", true)
+		currentMob = randomMob()
+		drawMob(currentMob)
+	}
+
+	function randomMob() {
+		const randomIndex = random(mobs.length)-1
+		return mobs[randomIndex]
 	}

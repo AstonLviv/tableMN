@@ -38,11 +38,15 @@
 		mobElement.appendChild(mobHpElement)
 	}
 
-	function showBattle() {
+	function showBattle(playerHp, mob) {
 		const hideUi = document.getElementById('main')
 		hideUi.style.display = "none"
 		const showUi = document.getElementById('battle')
 		showUi.style.display = "block"
+
+		const playerElement =  document.getElementById("playerBattle")
+		
+		const mobElement = document.getElementById("mobBattle")
 	}
 
 	function updateRssSkill(rssName) {
