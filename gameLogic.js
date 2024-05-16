@@ -44,8 +44,13 @@
 	const skillPointsForLevel = [5, 8, 10, 13, 15, 20, 25, 30, 35, 50]
 	function randomMob() {
 		const mobsCount = mobs.length
-		return random(mobs)
+		const random = random(mobs)
+		const copy = { ...random}
+		console.log("rnd - " + random)
+		console.log("cpy - " + random)
+		return copy
 	}
+
 	function mine() {
 		alreadyMined = true
 		enableButton("mineButton", false)
@@ -91,7 +96,7 @@
 	}
 
 	function fight() {
-		showBattle()
+		showBattle(playerHp, currentMob)
 
 	}
 
@@ -179,4 +184,13 @@
 	function randomMob() {
 		const randomIndex = random(mobs.length)-1
 		return mobs[randomIndex]
+	}
+
+	function hit() {
+		currentMob.hp--
+		setElementText("mobHpBattle", currentMob.hp)
+
+		if (currentMob.hp == 0) {
+			endBattle()
+		}
 	}

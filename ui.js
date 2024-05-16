@@ -30,7 +30,15 @@
 		nameElement.innerText = mob.name
 		mobElement.appendChild(nameElement)
 		const mobHpElement = document.createElement('div')
-		mobHpElement.innerText = mob.hp
+		if (mob.hp > 0) {
+			mobHpElement.innerText = mob.hp
+			enableButton("fightButton", true)
+
+		} else {
+			mobHpElement.innerText = "dead ):"
+			enableButton("fightButton", false)
+		}
+		
 		mobElement.appendChild(document.createElement("br"))
 		const hpLabelElement = document.createElement('div')
 		hpLabelElement.innerHTML = "HP: "
@@ -44,9 +52,17 @@
 		const showUi = document.getElementById('battle')
 		showUi.style.display = "block"
 
-		const playerElement =  document.getElementById("playerBattle")
-		
-		const mobElement = document.getElementById("mobBattle")
+		setElementText("playerBattle", playerHp)
+		setElementText("mobHpBattle", mob.hp)
+		setElementText("mobNameBattle", mob.name)
+	}
+
+	function endBattle() {
+		const hideUi = document.getElementById('main')
+		hideUi.style.display = "block"
+		const showUi = document.getElementById('battle')
+		showUi.style.display = "none"
+		drawMob(currentMob)
 	}
 
 	function updateRssSkill(rssName) {
@@ -134,4 +150,9 @@
 
 	function enableButton(elementId, enable) {
 		document.getElementById(elementId).disabled = !enable
+	}
+
+	function setElementText(id, text) {
+		const element = document.getElementById(id)
+		element.textContent = text
 	}

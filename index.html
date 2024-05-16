@@ -7,17 +7,30 @@
 </head>
 <body>
 	
-	<div id='battle' class="floating center" style="display:none;">
-		<div class="column" id="playerBattle">
-
-		</div>
-		<div class="column" id="mobBattle">
-
-		</div>
+	<div id='battle' style="display:none;">
+		<button onclick="hit()">
+			hit
+		</button>
 		LOG:
 		<div id="log">
-
+			logs
 		</div>
+		<div class="column50" >
+			player hp:
+			<div id="playerBattle">
+
+			</div>
+		</div>
+		<div class="column502" >
+			<div id="mobNameBattle">
+				mob 
+			</div> 
+			hp:
+			<div id="mobHpBattle">
+				
+			</div>
+		</div>
+		
 	</div>
 	<div id="main">
   		<div class="column" style="background-color:#fff;">
@@ -39,7 +52,7 @@
     		<h2>MOBS:</h2>
     		<div id="fighting">
     		</div>
-			<button onclick="fight()">fight</button>
+			<button onclick="fight()" id="fightButton">fight</button>
 		</div>
 		<div class="column" style="background-color:#fff;">
     		<h2>HP:</h2>
@@ -87,12 +100,24 @@
 		position: relative;
 		width: 90%;
 		padding: 10px 5%;
-		background: lightgrey;
+		background: white;
 		transition: all 1.3s ease;
 		animation: float 1.5s ease-in-out 0s infinite forwards;
 	}
 	.center {
 		text-align: center;
+	}
+
+	.column50 {
+		width: 50%;
+		padding: 10px;
+		background: gold;
+	}
+
+	.column502 {
+		width: 100%;
+		padding: 10px;
+		background: gray;
 	}
 </style>
 
@@ -100,5 +125,5 @@
 <script type="text/javascript" src="utils.js"></script>
 <script type="text/javascript" src="craft.js"></script>
 <script type="text/javascript" src="mobs.js"></script>
-<script type="text/javascript" src="index.js"></script>
+<script type="text/javascript" src="ui.js"></script>
 <script type="text/javascript" src="gameLogic.js"></script>
