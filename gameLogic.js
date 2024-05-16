@@ -42,12 +42,13 @@
 	let wagonOwned = false
 
 	const skillPointsForLevel = [5, 8, 10, 13, 15, 20, 25, 30, 35, 50]
+
 	function randomMob() {
-		const mobsCount = mobs.length
-		const random = random(mobs)
-		const copy = { ...random}
-		console.log("rnd - " + random)
-		console.log("cpy - " + random)
+		const randomIndex = random(mobs.length)-1
+		const rnd = mobs[randomIndex]
+		const copy = { ...rnd}
+		console.log("rnd - " + rnd)
+		console.log("cpy - " + copy)
 		return copy
 	}
 
@@ -179,11 +180,6 @@
 		enableButton("mineButton", true)
 		currentMob = randomMob()
 		drawMob(currentMob)
-	}
-
-	function randomMob() {
-		const randomIndex = random(mobs.length)-1
-		return mobs[randomIndex]
 	}
 
 	function hit() {
