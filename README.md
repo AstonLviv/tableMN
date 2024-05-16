@@ -11,13 +11,18 @@ MINE,RSS:
 	+ fix craft bug (rss name wrong)
 	+ inventory
 FIGHTING:
-	- mobs
+	+ attack
+	+ hp (amount + regen)
+	+ mobs
 	- mob drop must going to inventory
 	- gears
-	- hp (amount + regen)
-	- attack
 	- level
 	- skills
+	- mob must attack players
+	- hit chance
+	- min. max. damage
+	* full mine stats
+	* battle log
 MULTYPLAYER:
 	- players
 	- multiplayer 

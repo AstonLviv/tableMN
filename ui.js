@@ -52,7 +52,7 @@
 		const showUi = document.getElementById('battle')
 		showUi.style.display = "block"
 
-		setElementText("playerBattle", playerHp)
+		setElementText("playerHpBattle", playerHp)
 		setElementText("mobHpBattle", mob.hp)
 		setElementText("mobNameBattle", mob.name)
 	}
@@ -63,6 +63,7 @@
 		const showUi = document.getElementById('battle')
 		showUi.style.display = "none"
 		drawMob(currentMob)
+		updatePlayerStats()
 	}
 
 	function updateRssSkill(rssName) {

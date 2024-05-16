@@ -47,18 +47,12 @@
 		const randomIndex = random(mobs.length)-1
 		const rnd = mobs[randomIndex]
 		const copy = { ...rnd}
-		console.log("rnd - " + rnd)
-		console.log("cpy - " + copy)
 		return copy
 	}
 
 	function mine() {
 		alreadyMined = true
 		enableButton("mineButton", false)
-		if ( playerHp != maxPlayerHp) {
-			playerHp += 1
-		}
-		updatePlayerStats()
 		let count = rssCountToMine() 
 		const name = rssName()
 		let mined = false
@@ -180,13 +174,24 @@
 		enableButton("mineButton", true)
 		currentMob = randomMob()
 		drawMob(currentMob)
+		if ( playerHp != maxPlayerHp) {
+			playerHp += 1
+		}
+		updatePlayerStats()
 	}
 
 	function hit() {
 		currentMob.hp--
 		setElementText("mobHpBattle", currentMob.hp)
-
+		mobHit()
 		if (currentMob.hp == 0) {
 			endBattle()
-		}
+		}	
+
+		
+	}
+
+	function mobHit() {
+		playerHp -= currentMob.damage
+		setElementText("playerHpBattle", playerHp)
 	}
