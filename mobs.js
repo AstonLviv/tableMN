@@ -4,6 +4,8 @@ let mobs = [
 		hp: 	4,
 		description: "a big spider that lives in a cave",
 		damage: 1,
+		maxDamage: 2,
+		hitChance: 80,
 		xp: 1,
 		loot: [
 			{
@@ -27,7 +29,9 @@ let mobs = [
 		name: 	"zombie",
 		hp: 	8,
 		description: "a zombie that raise from a grave at night",
-		damage: 1.5,
+		damage: 1,
+		maxDamage: 3,
+		hitChance: 80,
 		xp: 3,
 		loot: [
 			{
@@ -61,7 +65,9 @@ let mobs = [
 		name: 	"skeleton",
 		hp: 	12,
 		description: "skeleton king raised this skeleton to defeat you",
-		damage: 2.5,
+		damage: 2,
+		maxDamage: 3,
+		hitChance: 80,
 		xp: 5,
 		loot: [
 			{
@@ -100,7 +106,9 @@ let mobs = [
 		name: 	"blaze",
 		hp: 	20,
 		description: "a burning skeleton that can throw fireballs and fly",
-		damage: 4,
+		damage: 3,
+		maxDamage: 5, 
+		hitChance: 80,
 		xp: 20,
 		loot: [
 			{
@@ -139,7 +147,9 @@ let mobs = [
 		name: 	"Skeleton King",
 		hp: 	35,
 		description: "THE FINAL BOSS",
-		damage: 7.5,
+		damage: 7,
+		maxDamage: 9,
+		hitChance: 80,
 		xp: 50,
 		loot: [
 			{

@@ -181,17 +181,38 @@
 	}
 
 	function hit() {
-		currentMob.hp--
-		setElementText("mobHpBattle", currentMob.hp)
+		if (random(100) >= 90) {
+			console.log("you looser you missed, lol")
+		} else {
+			currentMob.hp -= playerDamage()
+			setElementText("mobHpBattle", currentMob.hp)
+		}
 		mobHit()
-		if (currentMob.hp == 0) {
+		if (playerHp <= 0) {
+			playerHp = 0
+			endBattle()
+		} else if (currentMob.hp <= 0) {
 			endBattle()
 		}	
-
-		
 	}
 
 	function mobHit() {
-		playerHp -= currentMob.damage
+		if (random(100) >= currentMob.hitChance) {
+			console.log("mob looser he missed, lol")
+			return
+		} 
+		const damage = mobDamage()
+		playerHp -= damage
 		setElementText("playerHpBattle", playerHp)
+		console.log("damage ="+damage)
+	}
+
+	function mobDamage() {
+		const addDamageRange = currentMob.maxDamage - currentMob.damage + 1
+		const additionalDamage = random(addDamageRange) - 1
+		return currentMob.damage + additionalDamage
+	}
+
+	function playerDamage() {
+		return random(2)
 	}

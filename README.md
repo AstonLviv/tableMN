@@ -14,16 +14,21 @@ FIGHTING:
 	+ attack
 	+ hp (amount + regen)
 	+ mobs
+	+ mob must attack players
+	+ min. max. damage
+	+ hit chance
+
 	- mob drop must going to inventory
 	- gears
 	- level
 	- skills
-	- mob must attack players
-	- hit chance
-	- min. max. damage
-	* full mine stats
-	* battle log
+
 MULTYPLAYER:
 	- players
 	- multiplayer 
 	- lan game
+
+DESIGN:
+	* full mine stats
+	* battle log
+	* UX

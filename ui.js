@@ -21,6 +21,7 @@
 	function updatePlayerStats() {
 		const element = document.getElementById("hp")
 		element.innerHTML = playerHp
+		enableButton("fightButton", playerHp > 0 && currentMob.hp > 0)
 	}
 
 	function drawMob(mob) {
@@ -32,11 +33,9 @@
 		const mobHpElement = document.createElement('div')
 		if (mob.hp > 0) {
 			mobHpElement.innerText = mob.hp
-			enableButton("fightButton", true)
 
 		} else {
 			mobHpElement.innerText = "dead ):"
-			enableButton("fightButton", false)
 		}
 		
 		mobElement.appendChild(document.createElement("br"))
