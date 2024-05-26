@@ -19,9 +19,10 @@
 	}
 
 	function updatePlayerStats() {
-		const element = document.getElementById("hp")
-		element.innerHTML = playerHp
+		setElementText("hp", playerHp)
+		setElementText("xp", xp)
 		enableButton("fightButton", playerHp > 0 && currentMob.hp > 0)
+
 	}
 
 	function drawMob(mob) {

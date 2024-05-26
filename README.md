@@ -17,8 +17,11 @@ FIGHTING:
 	+ mob must attack players
 	+ min. max. damage
 	+ hit chance
+	+ mob drop
 
-	- mob drop must going to inventory
+	- draw battle inventory
+	- draw battle inventory (in buttle with button "use")
+	- mob drop must going to BattleInventory
 	- gears
 	- level
 	- skills

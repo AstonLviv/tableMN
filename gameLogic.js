@@ -6,8 +6,11 @@
 	let currentMob = randomMob()
 	let playerHp = 5
 	let maxPlayerHp = 5
+	let xp = 0
 	drawMob(currentMob)
 	updatePlayerStats()
+
+	const battleInventory = [] 
 
 	let currentTurn = 1
 	let alreadyMined = false
@@ -41,7 +44,8 @@
 
 	let wagonOwned = false
 
-	const skillPointsForLevel = [5, 8, 10, 13, 15, 20, 25, 30, 35, 50]
+	const skillPointsForMineLevel = [5, 8, 10, 13, 15, 20, 25, 30, 35, 50]
+	const skillPointsForBattleLevel = [3, 8, 15, 25, 38, 53, 71, 95]
 
 	function randomMob() {
 		const randomIndex = random(mobs.length)-1
@@ -123,14 +127,14 @@
 	}
 
 	function skillLevel(skill) {
-		for (idx in skillPointsForLevel) {
-			const n = skillPointsForLevel[idx]
+		for (idx in skillPointsForMineLevel) {
+			const n = skillPointsForMineLevel[idx]
 			skill = skill - n 
 			if (skill < 0 ) {
 				return idx
 			}
 		}
-		return skillPointsForLevel.length-1
+		return skillPointsForMineLevel.length-1
 	}
 
 	function addBonus(bonus) {
@@ -192,7 +196,9 @@
 			playerHp = 0
 			endBattle()
 		} else if (currentMob.hp <= 0) {
-			endBattle()
+			xp += currentMob.xp
+			loot(currentMob)
+			endBattle()			
 		}	
 	}
 
@@ -215,4 +221,13 @@
 
 	function playerDamage() {
 		return random(2)
+	}
+
+	function loot(mob) {
+		const dice = random(6)
+		for (const lootItem of mob.loot) {
+			if (lootItem.dice == dice) {
+				battleInventory.push(lootItem)
+			}
+		}
 	}
