@@ -4,6 +4,7 @@
 
 	updateCraft()
 	let currentMob = randomMob()
+	let round = 1
 	let playerHp = 5
 	let maxPlayerHp = 5
 	let xp = 0
@@ -95,8 +96,8 @@
 	}
 
 	function fight() {
+		round  = 1
 		showBattle(playerHp, currentMob)
-
 	}
 
 	function rssName() {
@@ -185,32 +186,43 @@
 	}
 
 	function hit() {
+		playerHit()
+		mobHit()
+		checkHP()
+		round++	
+	}
+
+function checkHP() {
+	if (playerHp <= 0) {
+		playerHp = 0
+		updateBattleButtons(false)
+	} else if (currentMob.hp <= 0) {
+		xp += currentMob.xp
+		loot(currentMob)
+		updateBattleButtons(false)
+	}
+}
+
+	function playerHit() {
 		if (random(100) >= 90) {
-			console.log("you looser you missed, lol")
+			log("haha looser you missed, lol")
 		} else {
-			currentMob.hp -= playerDamage()
+			const dmg = playerDamage()
+			log("you deal " + dmg + " damage to " + currentMob.name)
+			currentMob.hp -= dmg
 			setElementText("mobHpBattle", currentMob.hp)
 		}
-		mobHit()
-		if (playerHp <= 0) {
-			playerHp = 0
-			endBattle()
-		} else if (currentMob.hp <= 0) {
-			xp += currentMob.xp
-			loot(currentMob)
-			endBattle()			
-		}	
 	}
 
 	function mobHit() {
 		if (random(100) >= currentMob.hitChance) {
-			console.log("mob looser he missed, lol")
+			log(currentMob.name + " looser he missed, lol")
 			return
 		} 
 		const damage = mobDamage()
 		playerHp -= damage
 		setElementText("playerHpBattle", playerHp)
-		console.log("damage ="+damage)
+		log(currentMob.name + " deals " + damage)
 	}
 
 	function mobDamage() {
@@ -230,4 +242,9 @@
 				battleInventory.push(lootItem)
 			}
 		}
+	}
+
+	function updateBattleButtons(newBattle) {
+		enableButton("hitButton", newBattle)
+		enableButton("endBattleButton", !newBattle)
 	}

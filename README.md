@@ -18,6 +18,8 @@ FIGHTING:
 	+ min. max. damage
 	+ hit chance
 	+ mob drop
+	+ button to finish battle
+	+ draw "battle inventory" label
 
 	- draw battle inventory
 	- draw battle inventory (in buttle with button "use")
@@ -32,6 +34,7 @@ MULTYPLAYER:
 	- lan game
 
 DESIGN:
+	+ battle log
+
 	* full mine stats
-	* battle log
 	* UX

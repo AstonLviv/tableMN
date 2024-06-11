@@ -8,13 +8,14 @@
 <body>
 	
 	<div id='battle' style="display:none;">
-		<button onclick="hit()">
+		<button onclick="hit()" id="hitButton">
 			hit
 		</button>
-		LOG:
-		<div id="log">
-			logs
-		</div>
+		<br>
+		<button onclick="endBattle()" id="endBattleButton">
+			end battle
+		</button><br>
+
 		<div class="column50" >
 			player hp:
 			<div id="playerHpBattle">
@@ -26,11 +27,11 @@
 				mob 
 			</div> 
 			hp:
-			<div id="mobHpBattle">
-				
-			</div>
+			<div id="mobHpBattle"></div>			
+			<br>
+			<div style="padding-left: 10px;">LOG:</div>
+			<div id="log"></div>
 		</div>
-		
 	</div>
 	<div id="main">
   		<div class="column" style="background-color:#fff;">
@@ -122,13 +123,16 @@
 	.column50 {
 		width: 50%;
 		padding: 10px;
-		background: white;
 	}
 
 	.column502 {
 		width: 100%;
 		padding: 10px;
-		background: white;
+	}
+
+	#log {
+		background-color: black;
+		color: rgb(2, 171, 2);
 	}
 </style>
 

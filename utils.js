@@ -1,5 +1,5 @@
 // 1...max
 function random(max) {
-	x = Math.ceil(Math.random()*max) 
-	return x
+	x = Math.floor(Math.random()*max) 
+	return x+1
 }
