@@ -2,6 +2,8 @@
 	let stone = 0
 	let metal = 0
 
+	const battleInventory = {} 
+
 	updateCraft()
 	let currentMob = randomMob()
 	let round = 1
@@ -10,8 +12,6 @@
 	let xp = 0
 	drawMob(currentMob)
 	updatePlayerStats()
-
-	const battleInventory = [] 
 
 	let currentTurn = 1
 	let alreadyMined = false
@@ -98,7 +98,8 @@
 	function fight() {
 		round  = 1
 		showBattle(playerHp, currentMob)
-	}
+	} 
+
 
 	function rssName() {
 		const generate = random(WOOD_CHANCE + STONE_CHANCE + METAL_CHANCE)
@@ -179,9 +180,7 @@
 		enableButton("mineButton", true)
 		currentMob = randomMob()
 		drawMob(currentMob)
-		if ( playerHp != maxPlayerHp) {
-			playerHp += 1
-		}
+		addPlayerHp(1)
 		updatePlayerStats()
 	}
 
@@ -189,19 +188,19 @@
 		playerHit()
 		mobHit()
 		checkHP()
-		round++	
+		round++
 	}
 
-function checkHP() {
-	if (playerHp <= 0) {
-		playerHp = 0
-		updateBattleButtons(false)
-	} else if (currentMob.hp <= 0) {
-		xp += currentMob.xp
-		loot(currentMob)
-		updateBattleButtons(false)
+	function checkHP() {
+		if (playerHp <= 0) {
+			playerHp = 0
+			updateBattleButtons(false)
+		} else if (currentMob.hp <= 0) {
+			xp += currentMob.xp
+			loot(currentMob)
+			updateBattleButtons(false)
+		}
 	}
-}
 
 	function playerHit() {
 		if (random(100) >= 90) {
@@ -239,12 +238,58 @@ function checkHP() {
 		const dice = random(6)
 		for (const lootItem of mob.loot) {
 			if (lootItem.dice == dice) {
-				battleInventory.push(lootItem)
-			}
+				if (lootItem.name == "hp") {
+					addPlayerHp(lootItem.value)
+					log("restored " + lootItem.value + "hp")
+				} else {
+					addLootItem(lootItem)
+					log("looted " + lootItem.name)
+				}
+			}	
 		}
 	}
 
 	function updateBattleButtons(newBattle) {
 		enableButton("hitButton", newBattle)
 		enableButton("endBattleButton", !newBattle)
+	}
+
+	function addPlayerHp(value) {
+		playerHp += value
+		if (playerHp > maxPlayerHp) {
+			playerHp = maxPlayerHp
+		}
+	}
+
+	function addLootItem(lootItem) {
+		const key = lootItem.name
+		if (battleInventory.hasOwnProperty(key)) {
+			battleInventory[key] += lootItem.value
+		} else {
+			battleInventory[key] = lootItem.value
+		}
+	}
+
+	function useLootItem(lootItem) {
+		const key = lootItem
+		if (battleInventory.hasOwnProperty(key)) {
+			if (battleInventory[key] > 1) {
+				battleInventory[key]--
+			} else {
+				delete battleInventory[key]
+			} 
+
+			if (lootItem == "potion") {
+				addPlayerHp(1)
+			} else if (lootItem == "dice") {
+				alert("dice bonus + 1")
+			} else {
+				alert("wtf are you doing?")
+			}
+		} else {
+			alert("oops, " + lootItem.name + " not exist")
+		}
+		updatePlayerStats()
+		setElementText("playerHpBattle", playerHp)
+		drawBattleInventory('battleInventoryInBattle')
 	}

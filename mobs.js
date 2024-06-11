@@ -55,10 +55,15 @@ let mobs = [
 				dice: 5
 			},
 			{
-				name: "dice and potion",
+				name: "dice",
 				value: 1,
 				dice: 6
-			}
+			},
+			{
+				name: "potion",
+				value: 1,
+				dice: 6
+			},
 		]	
 	},
 	{	
@@ -91,12 +96,22 @@ let mobs = [
 				dice: 4
 			},
 			{
-				name: "dice and potion",
+				name: "dice",
 				value: 1,
 				dice: 5
 			},
 			{
-				name: "dice and potion",
+				name: "potion",
+				value: 1,
+				dice: 5
+			},
+			{
+				name: "dice",
+				value: 1,
+				dice: 6
+			},	
+			{
+				name: "potion",
 				value: 1,
 				dice: 6
 			}
@@ -132,12 +147,22 @@ let mobs = [
 				dice: 4
 			},
 			{
-				name: "dice and potion",
+				name: "potion",
 				value: 2,
 				dice: 5
 			},
 			{
-				name: "dice and potion",
+				name: "dice",
+				value: 2,
+				dice: 5
+			},
+			{
+				name: "dice",
+				value: 2,
+				dice: 6
+			},
+			{
+				name: "potion",
 				value: 2,
 				dice: 6
 			}
@@ -168,17 +193,32 @@ let mobs = [
 				dice: 3
 			},
 			{
-				name: "dice and potion",
+				name: "dice",
 				value: 3,
 				dice: 4
 			},
 			{
-				name: "dice and potion",
+				name: "potion",
+				value: 3,
+				dice: 4
+			},
+			{
+				name: "dice",
 				value: 4,
 				dice: 5
 			},
 			{
-				name: "dice and potion",
+				name: "potion",
+				value: 4,
+				dice: 5
+			},
+			{
+				name: "dice",
+				value: 5,
+				dice: 6
+			},
+			{
+				name: "potion",
 				value: 5,
 				dice: 6
 			}

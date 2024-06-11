@@ -20,10 +20,12 @@ FIGHTING:
 	+ mob drop
 	+ button to finish battle
 	+ draw "battle inventory" label
+	+ draw battle inventory
+	+ mob drop must going to BattleInventory
+	
 
-	- draw battle inventory
+	+- working consumables
 	- draw battle inventory (in buttle with button "use")
-	- mob drop must going to BattleInventory
 	- gears
 	- level
 	- skills

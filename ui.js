@@ -22,7 +22,28 @@
 		setElementText("hp", playerHp)
 		setElementText("xp", xp)
 		enableButton("fightButton", playerHp > 0 && currentMob.hp > 0)
+		drawBattleInventory('battleInventory')
+	}
 
+	function drawBattleInventory(elementId) {
+		const battleInventoryElement = document.getElementById(elementId)
+		battleInventoryElement.innerHTML = ""
+		
+		for (const item in battleInventory) {
+			const descriptionElement = document.createElement("div")
+			descriptionElement.textContent = " " + item + " x" + battleInventory[item]
+
+			const buttonElement = document.createElement('button')
+			buttonElement.textContent = "use"
+			buttonElement.onclick = (event) => {
+				useLootItem(item)
+			}
+			//buttonElement.disabled = !isEnoughtResources(tool.price)
+
+			battleInventoryElement.appendChild(buttonElement)
+			battleInventoryElement.appendChild(descriptionElement)
+			battleInventoryElement.appendChild(document.createElement('br'))
+		}
 	}
 
 	function drawMob(mob) {
@@ -57,6 +78,9 @@
 		setElementText("mobNameBattle", mob.name)
 
 		updateBattleButtons(true)
+		setElementText("log", "")
+
+		drawBattleInventory('battleInventoryInBattle')
 	}
 
 	function endBattle() {
