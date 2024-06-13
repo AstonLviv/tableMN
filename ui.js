@@ -19,8 +19,8 @@
 	}
 
 	function updatePlayerStats() {
-		setElementText("hp", playerHp)
-		setElementText("xp", xp)
+		setElementText("hp", playerHpString())
+		setElementText("xp", xp + "(" + checkPlayerLevel() + ")")
 		showElement("bonusInBattle", diceBonus > 0)
 		setElementText("diceBonusInBattle", diceBonus + "%")
 		showElement("bonus", diceBonus > 0)
@@ -58,7 +58,7 @@
 		mobElement.appendChild(nameElement)
 		const mobHpElement = document.createElement('div')
 		if (mob.hp > 0) {
-			mobHpElement.innerText = mob.hp
+			mobHpElement.innerText = mobHpString(mob)
 
 		} else {
 			mobHpElement.innerText = "dead ):"
@@ -75,8 +75,8 @@
 		showElement('main', false)
 		showElement('battle', true)
 
-		setElementText("playerHpBattle", playerHp)
-		setElementText("mobHpBattle", mob.hp)
+		setElementText("playerHpBattle", playerHpString())
+		setElementText("mobHpBattle", mobHpString(mob))
 		setElementText("mobNameBattle", mob.name)
 
 		updateBattleButtons(true)
@@ -197,4 +197,24 @@
 	function showElement(id, show) {
 		const element = document.getElementById(id)
 		element.style.display = show ? "block" : "none"
+	}
+
+	function playerHpString() {
+		return unitHpString(playerHp, maxPlayerHp)
+	}
+
+	function mobHpString(mob) {
+		return unitHpString(mob.hp, mob.maxHp)
+	}
+
+	function unitHpString(currentHp, maxHp) {
+		let result = currentHp + "/" + maxHp + "  "
+		for (let step = 1; step <= maxHp; step++) {
+			if (step <= currentHp) {
+				result += "❤️"
+			} else {
+				result += "🤍"
+			}
+		}
+		return result
 	}

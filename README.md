@@ -26,18 +26,34 @@ FIGHTING:
 	+ working consumables (dice!)
 		+ bonuses
 		+ variable damage?
-	
-	- gears
-	- levels
-	- skills
 
+	- levels
+		- skills
+			- mining skills
+				- choice between 2 resoures
+				- +1 hp by wood
+				- 40% mining chance
+			- battle skills
+				- lvl1: reroll mob, lvl2: choice between 2 mobs
+				- 40% to batlle dice
+				- vampirism
+	- gears
+		- weapons
+			- axe
+			- sword
+			- spear
+		- armor
+			- helment
+			- armour
+			- boots
 MULTYPLAYER:
-	- players
 	- multiplayer 
+	- players
 	- lan game
 
 DESIGN:
 	+ battle log
 
+	* hearts
 	* full mine stats
 	* UX

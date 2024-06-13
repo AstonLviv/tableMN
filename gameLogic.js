@@ -2,13 +2,17 @@
 	let stone = 0
 	let metal = 0
 
+	const skillPointsForMineLevel = [5, 8, 10, 13, 15, 20, 25, 30, 35, 50]
+	const skillPointsForBattleLevel = [3, 8, 15, 25, 38, 53, 71, 95]
+
 	let diceBonus = 0
 
 	const battleInventory = {} 
 
 	updateCraft()
-	const PLAYER_DAMAGE = 2
+	const PLAYER_DAMAGE = 2 //base 2
 	const PLAYER_HP = 5
+	//base 5
 	let currentMob = randomMob()
 	let round = 1
 	let playerHp = PLAYER_HP
@@ -49,13 +53,11 @@
 
 	let wagonOwned = false
 
-	const skillPointsForMineLevel = [5, 8, 10, 13, 15, 20, 25, 30, 35, 50]
-	const skillPointsForBattleLevel = [3, 8, 15, 25, 38, 53, 71, 95]
-
 	function randomMob() {
 		const randomIndex = random(mobs.length)-1
 		const rnd = mobs[randomIndex]
 		const copy = { ...rnd}
+		copy.maxHp = copy.hp
 		return copy
 	}
 
@@ -135,14 +137,7 @@
 	}
 
 	function skillLevel(skill) {
-		for (idx in skillPointsForMineLevel) {
-			const n = skillPointsForMineLevel[idx]
-			skill = skill - n 
-			if (skill < 0 ) {
-				return idx
-			}
-		}
-		return skillPointsForMineLevel.length-1
+		return checkLevel(skill, skillPointsForMineLevel)
 	}
 
 	function addBonus(bonus) {
@@ -203,6 +198,7 @@
 			updateBattleButtons(false)
 		} else if (currentMob.hp <= 0) {
 			xp += currentMob.xp
+			checkPlayerLevel()
 			loot(currentMob)
 			updateBattleButtons(false)
 		}
@@ -214,7 +210,7 @@
 		} else {
 			const dmg = playerDamage()	
 			currentMob.hp -= dmg
-			setElementText("mobHpBattle", currentMob.hp)
+			setElementText("mobHpBattle", mobHpString(currentMob))
 		}
 	}
 
@@ -225,7 +221,7 @@
 		} 
 		const damage = mobDamage()
 		playerHp -= damage
-		setElementText("playerHpBattle", playerHp)
+		setElementText("playerHpBattle", playerHpString())
 	}
 
 	function mobDamage() {
@@ -315,6 +311,23 @@
 			alert("oops, " + lootItem.name + " not exist")
 		}
 		updatePlayerStats()
-		setElementText("playerHpBattle", playerHp)
+		setElementText("playerHpBattle", playerHpString())
 		drawBattleInventory('battleInventoryInBattle')
+	}
+
+	function checkPlayerLevel() {
+		const playerLvl = checkLevel(xp, skillPointsForBattleLevel)
+		maxPlayerHp = PLAYER_HP + +playerLvl
+		return playerLvl
+	}
+
+	function checkLevel(skill, levels) {
+		for (idx in levels) {
+			const n = levels[idx]
+			skill = skill - n 
+			if (skill < 0 ) {
+				return idx
+			}
+		}
+		return +levels.length-1
 	}

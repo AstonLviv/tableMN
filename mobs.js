@@ -1,6 +1,6 @@
 let mobs = [
 	{	
-		name: 	"spider",
+		name: 	"🕷️spider🕷️",
 		hp: 	4,
 		description: "a big spider that lives in a cave",
 		minDamage: 1,
@@ -27,7 +27,7 @@ let mobs = [
 		]		
 	},
 	{	
-		name: 	"zombie",
+		name: 	"zombie🧟",
 		hp: 	8,
 		description: "a zombie that raise from a grave at night",
 		minDamage: 1,
@@ -69,7 +69,7 @@ let mobs = [
 		]	
 	},
 	{	
-		name: 	"skeleton",
+		name: 	"skeleton☠️",
 		hp: 	12,
 		description: "skeleton king raised this skeleton to defeat you",
 		minDamage: 2,
@@ -121,7 +121,7 @@ let mobs = [
 		]		
 	},
 	{	
-		name: 	"blaze",
+		name: 	"🔥blaze🔥",
 		hp: 	20,
 		description: "a burning skeleton that can throw fireballs and fly",
 		minDamage: 3,
@@ -173,7 +173,7 @@ let mobs = [
 		]	
 	},
 	{
-		name: 	"Skeleton King",
+		name: 	"Skeleton King👑☠️",
 		hp: 	35,
 		description: "THE FINAL BOSS",
 		minDamage: 5,
