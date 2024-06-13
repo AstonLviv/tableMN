@@ -2,13 +2,17 @@
 	let stone = 0
 	let metal = 0
 
+	let diceBonus = 0
+
 	const battleInventory = {} 
 
 	updateCraft()
+	const PLAYER_DAMAGE = 2
+	const PLAYER_HP = 5
 	let currentMob = randomMob()
 	let round = 1
-	let playerHp = 5
-	let maxPlayerHp = 5
+	let playerHp = PLAYER_HP
+	let maxPlayerHp = PLAYER_HP
 	let xp = 0
 	drawMob(currentMob)
 	updatePlayerStats()
@@ -124,7 +128,9 @@
 	}
 
 	function isRssMined(level, toolBonus) {
-		const chance = level*LEVEL_BONUS
+		const chance = level * LEVEL_BONUS + diceBonus
+		diceBonus = 0
+		updatePlayerStats()
 		return random(100) <= (MINE_CHANCE + chance + toolBonus)
 	}
 
@@ -206,8 +212,7 @@
 		if (random(100) >= 90) {
 			log("haha looser you missed, lol")
 		} else {
-			const dmg = playerDamage()
-			log("you deal " + dmg + " damage to " + currentMob.name)
+			const dmg = playerDamage()	
 			currentMob.hp -= dmg
 			setElementText("mobHpBattle", currentMob.hp)
 		}
@@ -221,17 +226,34 @@
 		const damage = mobDamage()
 		playerHp -= damage
 		setElementText("playerHpBattle", playerHp)
-		log(currentMob.name + " deals " + damage)
 	}
 
 	function mobDamage() {
-		const addDamageRange = currentMob.maxDamage - currentMob.damage + 1
+		const addDamageRange = currentMob.maxDamage - currentMob.minDamage + 1
 		const additionalDamage = random(addDamageRange) - 1
-		return currentMob.damage + additionalDamage
+		const regularDamage = currentMob.minDamage + additionalDamage
+
+		if (random(100) >= 100 - currentMob.critChance) {
+			const critDamage = Math.ceil(regularDamage * 1.5)
+			log(currentMob.name + " deals crit " + critDamage)
+			return critDamage 
+		} 
+		log(currentMob.name + " deals " + regularDamage)
+		return regularDamage
 	}
 
 	function playerDamage() {
-		return random(2)
+		const playerDmg = random(PLAYER_DAMAGE)
+		let additionalDamage = Math.floor(diceBonus/100)
+		if (random(100) <= diceBonus % 100) {
+			additionalDamage += 1
+		}
+		if (additionalDamage > 0) {
+			log("you deal " + playerDmg + " + " + additionalDamage + " damage to " + currentMob.name)
+		} else {
+			log("you deal " + playerDmg + " damage to " + currentMob.name)
+		}
+		return playerDmg + additionalDamage
 	}
 
 	function loot(mob) {
@@ -252,6 +274,9 @@
 	function updateBattleButtons(newBattle) {
 		enableButton("hitButton", newBattle)
 		enableButton("endBattleButton", !newBattle)
+		if (newBattle == false) {
+			diceBonus = 0
+		}
 	}
 
 	function addPlayerHp(value) {
@@ -282,7 +307,7 @@
 			if (lootItem == "potion") {
 				addPlayerHp(1)
 			} else if (lootItem == "dice") {
-				alert("dice bonus + 1")
+				diceBonus += 20
 			} else {
 				alert("wtf are you doing?")
 			}

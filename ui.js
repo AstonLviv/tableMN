@@ -21,6 +21,10 @@
 	function updatePlayerStats() {
 		setElementText("hp", playerHp)
 		setElementText("xp", xp)
+		showElement("bonusInBattle", diceBonus > 0)
+		setElementText("diceBonusInBattle", diceBonus + "%")
+		showElement("bonus", diceBonus > 0)
+		setElementText("diceBonus", diceBonus + "%")
 		enableButton("fightButton", playerHp > 0 && currentMob.hp > 0)
 		drawBattleInventory('battleInventory')
 	}
@@ -68,10 +72,8 @@
 	}
 
 	function showBattle(playerHp, mob) {
-		const hideUi = document.getElementById('main')
-		hideUi.style.display = "none"
-		const showUi = document.getElementById('battle')
-		showUi.style.display = "block"
+		showElement('main', false)
+		showElement('battle', true)
 
 		setElementText("playerHpBattle", playerHp)
 		setElementText("mobHpBattle", mob.hp)
@@ -84,10 +86,9 @@
 	}
 
 	function endBattle() {
-		const hideUi = document.getElementById('main')
-		hideUi.style.display = "block"
-		const showUi = document.getElementById('battle')
-		showUi.style.display = "none"
+		showElement('main', true)
+		showElement('battle', false)
+		
 		drawMob(currentMob)
 		updatePlayerStats()
 	}
@@ -191,4 +192,9 @@
 	function appendElementText(id, text) {
 		const element = document.getElementById(id)
 		element.innerHTML += "<br>"+text
+	}
+
+	function showElement(id, show) {
+		const element = document.getElementById(id)
+		element.style.display = show ? "block" : "none"
 	}
