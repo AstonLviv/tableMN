@@ -14,7 +14,7 @@
 	const battleInventory = {} 
 
 	updateCraft()
-	const PLAYER_DAMAGE =s 2 //base 2
+	const PLAYER_DAMAGE = 2 //base 2
 	const PLAYER_HP = 5 //base 5
 	let currentMob = randomMob()
 	let round = 1
