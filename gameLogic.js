@@ -6,13 +6,16 @@
 	const skillPointsForBattleLevel = [3, 8, 15, 25, 38, 53, 71, 95]
 
 	let diceBonus = 0
+	let levelBonus = 0
+
+	const LEVEL_BATTLE_BONUS = 15
+	let alreadyMined = false
 
 	const battleInventory = {} 
 
 	updateCraft()
-	const PLAYER_DAMAGE = 2 //base 2
-	const PLAYER_HP = 5
-	//base 5
+	const PLAYER_DAMAGE =s 2 //base 2
+	const PLAYER_HP = 5 //base 5
 	let currentMob = randomMob()
 	let round = 1
 	let playerHp = PLAYER_HP
@@ -22,7 +25,7 @@
 	updatePlayerStats()
 
 	let currentTurn = 1
-	let alreadyMined = false
+	
 	
 	const WOOD_CHANCE = 50
 	const STONE_CHANCE = 30
@@ -34,6 +37,8 @@
 
 	const MINE_CHANCE = 40
 	const LEVEL_BONUS = 5
+
+	
 
 	const ONE_RATE = ONE_CHANCE
 	const TWO_RATE = ONE_CHANCE + TWO_CHANCE
@@ -240,8 +245,9 @@
 
 	function playerDamage() {
 		const playerDmg = random(PLAYER_DAMAGE)
-		let additionalDamage = Math.floor(diceBonus/100)
-		if (random(100) <= diceBonus % 100) {
+		const bonus = diceBonus + levelBonus
+		let additionalDamage = Math.floor(bonus/100)
+		if (random(100) <= bonus % 100) {
 			additionalDamage += 1
 		}
 		if (additionalDamage > 0) {
@@ -318,6 +324,7 @@
 	function checkPlayerLevel() {
 		const playerLvl = checkLevel(xp, skillPointsForBattleLevel)
 		maxPlayerHp = PLAYER_HP + +playerLvl
+		levelBonus = LEVEL_BATTLE_BONUS * +playerLvl
 		return playerLvl
 	}
 

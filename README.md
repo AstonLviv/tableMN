@@ -10,6 +10,8 @@ MINE,RSS:
 	+ fix mine bug (rss count is not udated)
 	+ fix craft bug (rss name wrong)
 	+ inventory
+
+	- show what you gonna mine
 FIGHTING:
 	+ attack
 	+ hp (amount + regen)
@@ -27,7 +29,7 @@ FIGHTING:
 		+ bonuses
 		+ variable damage?
 
-	- levels
+	+ levels
 		- skills
 			- mining skills
 				- choice between 2 resoures
@@ -53,7 +55,16 @@ MULTYPLAYER:
 
 DESIGN:
 	+ battle log
+	+ hearts
 
-	* hearts
-	* full mine stats
+	* show hp in percents
+	* disable use potion with max hp
+	* show battle result
+	* disable usables after death
+	* show xp to next LVL
+	* show LVLup info
+	* full stats
+		* mine
+		* battle
 	* UX
+	* status update per turn
