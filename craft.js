@@ -48,7 +48,8 @@ const gears = [
 			"critMultiplier": 0.25,
 			"critChance": 20
 		},
-		owned: false
+		owned: false,
+		type: "weapon",
 	},
 	{
 		name: 	"sword",
@@ -61,7 +62,8 @@ const gears = [
 			"critMultiplier": 0.40,
 			"critChance": 10,
 		},
-		owned: false
+		owned: false,
+		type: "weapon",
 	},
 	{
 		name: 	"spear",
@@ -74,6 +76,47 @@ const gears = [
 			"critMultiplier": 0.30,
 			"critChance": 15
 		},
-		owned: false
+		owned: false,
+		type: "weapon",
+	},
+	{
+		name: 	"helmet",
+		price: 	[3, 6, 2],
+		description: "will help you to defend from mobs",
+		bonus: {
+			"maxHp": 3,
+		},
+		owned: false,
+		type: "armor_1",
+	},
+	{
+		name: 	"armour",
+		price: 	[5, 5, 5],
+		description: "will help you to defend from mobs",
+		bonus: {
+			"maxHp": 5,
+		},
+		owned: false,
+		type: "armor_2",
+	},
+	{
+		name: 	"pants",
+		price: 	[3, 4, 3],
+		description: "will help you to defend from mobs",
+		bonus: {
+			"maxHp": 4,
+		},
+		owned: false,
+		type: "armor_3",
+	},
+	{
+		name: 	"boots",
+		price: 	[0, 0, 4],
+		description: "will help you to defend from mobs",
+		bonus: {
+			"maxHp": 1,
+		},
+		owned: false,
+		type: "armor_4",
 	}
 ]

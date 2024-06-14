@@ -25,7 +25,8 @@
 		"maxDamage": PLAYER_DAMAGE,
 		"bonusDamage": 0,
 		"critMultiplier": 1.5,
-		"critChance": 5
+		"critChance": 5,
+		"maxHp": 0,
 	}
 	
 	let gearBonuses = defaultGearBonuses
@@ -359,7 +360,7 @@
 
 	function checkPlayerLevel() {
 		const playerLvl = checkLevel(xp, skillPointsForBattleLevel)
-		maxPlayerHp = PLAYER_HP + +playerLvl
+		maxPlayerHp = PLAYER_HP + +playerLvl + gearBonuses.maxHp
 		levelBonus = LEVEL_BATTLE_BONUS * +playerLvl
 		return playerLvl
 	}
@@ -391,7 +392,7 @@
 
 		for (gear of gears) {
 			if (gear.name == name) {
-				equipment.weapon = {...gear}
+				equipment[gear.type] = {...gear}
 				
 				gearBonuses = {...defaultGearBonuses}
 				for (const key in equipment) {
@@ -403,6 +404,8 @@
 				break
 			}
 		}
+		const playerLvl = checkLevel(xp, skillPointsForBattleLevel)
+		maxPlayerHp = PLAYER_HP + +playerLvl + gearBonuses.maxHp
 		updatePlayerStats()
 		updateEquipment()
 	}

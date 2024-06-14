@@ -27,6 +27,15 @@ FIGHTING:
 	+ working consumables (dice!)
 		+ bonuses
 		+ variable damage?
+	+ gears
+		+ weapons
+			+ axe
+			+ sword
+			+ spear
+		+ armor
+			+ helment
+			+ armour
+			+ boots
 
 	+ levels
 		- skills
@@ -38,15 +47,6 @@ FIGHTING:
 				- lvl1: reroll mob, lvl2: choice between 2 mobs
 				- 40% to batlle dice
 				- vampirism
-	+- gears
-		+ weapons
-			+ axe
-			+ sword
-			+ spear
-		- armor
-			- helment
-			- armour
-			- boots
 MULTYPLAYER:
 	- multiplayer 
 	- players
@@ -60,6 +60,7 @@ DESIGN:
 	+ disable usables after death
 	
 	* show hp in percents
+	* images ffrom gpt
 	* show battle result
 	* show xp to next LVL
 	* show LVLup info
