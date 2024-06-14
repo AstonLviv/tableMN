@@ -38,11 +38,11 @@ FIGHTING:
 				- lvl1: reroll mob, lvl2: choice between 2 mobs
 				- 40% to batlle dice
 				- vampirism
-	- gears
-		- weapons
-			- axe
-			- sword
-			- spear
+	+- gears
+		+ weapons
+			+ axe
+			+ sword
+			+ spear
 		- armor
 			- helment
 			- armour
@@ -56,14 +56,18 @@ DESIGN:
 	+ battle log
 	+ hearts
 	+ status update per turn
-
+	+ disable use potion with max hp
+	+ disable usables after death
+	
 	* show hp in percents
-	* disable use potion with max hp
 	* show battle result
-	* disable usables after death
 	* show xp to next LVL
 	* show LVLup info
 	* full stats
-		* mine
+		* all mine chances
 		* battle
+			* crit chance
+			* crit multiplier
+			* hit chance
+			* additional bonus chance
 	* UX

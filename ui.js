@@ -27,6 +27,7 @@
 		setElementText("diceBonus", diceBonus + "%")
 		enableButton("fightButton", playerHp > 0 && currentMob.hp > 0)
 		drawBattleInventory('battleInventory')
+		updateDamage()
 	}
 
 	function drawBattleInventory(elementId) {
@@ -42,7 +43,10 @@
 			buttonElement.onclick = (event) => {
 				useLootItem(item)
 			}
-			//buttonElement.disabled = !isEnoughtResources(tool.price)
+			buttonElement.disabled = playerHp <= 0
+			if (item == "potion") {
+				buttonElement.disabled = playerHp == maxPlayerHp
+			}
 
 			battleInventoryElement.appendChild(buttonElement)
 			battleInventoryElement.appendChild(descriptionElement)
@@ -159,6 +163,27 @@
 			inventElement.appendChild(descriptionElement)
 			inventElement.appendChild(document.createElement('br'))    		
 		}
+		for (gear of gears) {
+			if (gear.owned == false) continue
+			
+			const descriptionElement = document.createElement("div")
+			descriptionElement.textContent = ' ' + gear.description
+
+			const nameElement = document.createElement('div')
+			nameElement.textContent = gear.name
+
+			const buttonElement = document.createElement('button')
+			buttonElement.textContent = "equip " + gear.name
+			buttonElement.onclick = (event) => {
+				equip(event.target.textContent)
+			}
+	//		buttonElement.disabled = !isEnoughtResources(item.price)
+
+			inventElement.appendChild(nameElement)
+			inventElement.appendChild(descriptionElement)
+			inventElement.appendChild(document.createElement('br')) 
+			inventElement.appendChild(buttonElement)   		
+		}
 	}
 	
  	function updateTurn(turn) {
@@ -230,4 +255,33 @@
 		itemElement.appendChild(toolPriceElement)
 		itemElement.appendChild(document.createElement('br'))
 		return itemElement
+	}
+
+	function updateEquipment() {
+		const inventElement = document.getElementById('equipment')
+		inventElement.innerHTML = ""
+		for (key in equipment) {
+			const gearItem = equipment[key]
+			if (gearItem.hasOwnProperty("name") == false) continue
+
+			const descriptionElement = document.createElement("div")
+			descriptionElement.textContent = ' ' + gearItem.description
+
+			const nameElement = document.createElement('div')
+			nameElement.textContent = gearItem.name
+
+			inventElement.appendChild(nameElement)
+			inventElement.appendChild(descriptionElement)
+			inventElement.appendChild(document.createElement('br'))    		
+		}
+	}
+
+	function updateDamage() {
+		const bonus = diceBonus + levelBonus + gearBonuses.bonusDamage
+		const additionalDamage = Math.floor(bonus/100)
+//		if (random(100) <= bonus % 100) {
+//			additionalDamage += 1
+//		}
+		console.log("bonus = " + bonus + " addBomus = " + additionalDamage)
+		setElementText("damage", gearBonuses.minDamage + additionalDamage + "-" + (gearBonuses.maxDamage + additionalDamage))
 	}

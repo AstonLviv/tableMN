@@ -1,6 +1,5 @@
-	let wood = 0
-	let stone = 0
-	let metal = 0
+	const PLAYER_DAMAGE = 2 //base 2
+	const PLAYER_HP = 5 //base 5
 
 	const WOOD_CHANCE = 50
 	const STONE_CHANCE = 30
@@ -21,11 +20,25 @@
 	const STONE_RATE = WOOD_CHANCE + STONE_CHANCE
 	const METAL_RATE = WOOD_CHANCE + STONE_CHANCE + METAL_CHANCE
 
-	let gearBonuses = {
+	const defaultGearBonuses = {
+		"minDamage": 1,
+		"maxDamage": PLAYER_DAMAGE,
 		"bonusDamage": 0,
 		"critMultiplier": 1.5,
 		"critChance": 5
 	}
+	
+	let gearBonuses = defaultGearBonuses
+
+	const equipment = {
+		"weapon": {},
+		"armor": {},
+		"helmet": {},
+	}
+
+	let wood = 0
+	let stone = 0
+	let metal = 0
 
 	let rssCountToMine
 	let rssNameToMine
@@ -37,7 +50,6 @@
 		setElementText("mineButton", "Mine " + rssCountToMine + " " + rssNameToMine + "")
 	}
 	
-
 	const skillPointsForMineLevel = [5, 8, 10, 13, 15, 20, 25, 30, 35, 50]
 	const skillPointsForBattleLevel = [3, 8, 15, 25, 38, 53, 71, 95]
 
@@ -50,8 +62,6 @@
 	const battleInventory = {} 
 
 	updateCraft()
-	const PLAYER_DAMAGE = 2 //base 2
-	const PLAYER_HP = 5 //base 5
 	let currentMob = randomMob()
 	let round = 1
 	let playerHp = PLAYER_HP
@@ -91,7 +101,6 @@
 		} else {
 			mined = isRssMined(skillLevel(metalLvl), metalBonusChance)
 		}
-		console.log("mined = " + mined)
 
 		if (mined) {
 			if (wagonOwned == false) {
@@ -103,7 +112,7 @@
 			setStatusRed(false)
 			if (rssNameToMine == "wood") {
 				woodLvl += rssCountToMine
-				updateRss(rssNameToMine, wood += count)
+				updateRss(rssNameToMine, wood += rssCountToMine)
 			} else if (rssNameToMine == "stone") {
 				stoneLvl += rssCountToMine
 				updateRss(rssNameToMine, stone += rssCountToMine)
@@ -122,7 +131,6 @@
 		round  = 1
 		showBattle(playerHp, currentMob)
 	} 
-
 
 	function rssName() {
 		const generate = random(WOOD_CHANCE + STONE_CHANCE + METAL_CHANCE)
@@ -161,11 +169,9 @@
 		if (bonus.length != 3) {
 			alert("wrong addBonus usage")
 		}
-
 		woodBonusChance = woodBonusChance + bonus[0]
 		stoneBonusChance = stoneBonusChance + bonus[1]
 		metalBonusChance = metalBonusChance + bonus[2]
-
 	}
 
 	function craft(name) {
@@ -185,7 +191,7 @@
 				consumeRss(gear.price)
 				gear.owned = true
 				updateCraft()
-				addBattleBonus(gear.bonus)
+				//addBattleBonus(gear.bonus)
 			}
 		}
 		updateInventory()
@@ -266,22 +272,25 @@
 	}
 
 	function playerDamage() {
-		const playerDmg = random(PLAYER_DAMAGE)
+		const damageRange = gearBonuses.maxDamage - gearBonuses.minDamage
+		const playerDmg = gearBonuses.minDamage + random(damageRange)
 		const bonus = diceBonus + levelBonus + gearBonuses.bonusDamage
+		const crit = random(100) >= 100 - gearBonuses.critChance
 		let additionalDamage = Math.floor(bonus/100)
 		if (random(100) <= bonus % 100) {
 			additionalDamage += 1
 		}
-		if (additionalDamage > 0) {
-			log("you deal " + playerDmg + " + " + additionalDamage + " damage to " + currentMob.name)
+		if (crit) {
+			const critDamage = Math.ceil((playerDmg + additionalDamage) * gearBonuses.critMultiplier)
+			log("you deal " + critDamage + " damage to " + currentMob.name)
+			return critDamage
 		} else {
-			log("you deal " + playerDmg + " damage to " + currentMob.name)
+			if (additionalDamage > 0) {
+				log("you deal " + playerDmg + " + " + additionalDamage + " damage to " + currentMob.name)
+			} else {
+				log("you deal " + playerDmg + " damage to " + currentMob.name)
+			}
 		}
-		if (random(100) >= 100 - gearBonuses.critChance) {
-			const critDamage = Math.ceil(playerDmg * gearBonuses.critMultiplier)
-			log(currentMob.name + " deals crit " + critDamage)
-			return critDamage 
-		} 
 		return playerDmg + additionalDamage
 	}
 
@@ -374,4 +383,26 @@
 				gearBonuses[key] = bonus[key]
 			}
 		} 
+	}
+
+	function equip(text) {
+		const arr = text.split(" ")
+		const name = arr[arr.length - 1]
+
+		for (gear of gears) {
+			if (gear.name == name) {
+				equipment.weapon = {...gear}
+				
+				gearBonuses = {...defaultGearBonuses}
+				for (const key in equipment) {
+					const gearItem = equipment[key]
+					if(gearItem.hasOwnProperty("name")) {
+						addBattleBonus(gearItem.bonus)
+					}
+				}
+				break
+			}
+		}
+		updatePlayerStats()
+		updateEquipment()
 	}

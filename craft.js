@@ -40,11 +40,39 @@ const gears = [
 	{
 		name: 	"axe",
 		price: 	[4, 2, 1],
-		description: "axe will help you to fight mobs",
+		description: "will help you to fight mobs",
 		bonus: {
+			"minDamage":1,
+			"maxDamage": 2,
 			"bonusDamage": 50,
 			"critMultiplier": 0.25,
 			"critChance": 20
+		},
+		owned: false
+	},
+	{
+		name: 	"sword",
+		price: 	[4, 3, 3],
+		description: "will help you to fight mobs",
+		bonus: {
+			"minDamage":2,
+			"maxDamage": 2,
+			"bonusDamage": 60,
+			"critMultiplier": 0.40,
+			"critChance": 10,
+		},
+		owned: false
+	},
+	{
+		name: 	"spear",
+		price: 	[5, 4, 4],
+		description: "will help you to fight mobs",
+		bonus: {
+			"minDamage":1,
+			"maxDamage": 2,
+			"bonusDamage": 70,
+			"critMultiplier": 0.30,
+			"critChance": 15
 		},
 		owned: false
 	}
