@@ -2,6 +2,36 @@
 	let stone = 0
 	let metal = 0
 
+	const WOOD_CHANCE = 50
+	const STONE_CHANCE = 30
+	const METAL_CHANCE = 20
+
+	const ONE_CHANCE = 50
+	const TWO_CHANCE = 25
+	const THREE_CHANCE = 10
+
+	const MINE_CHANCE = 40
+	const LEVEL_BONUS = 5
+
+	const ONE_RATE = ONE_CHANCE
+	const TWO_RATE = ONE_CHANCE + TWO_CHANCE
+	const THREE_RATE = ONE_CHANCE + TWO_CHANCE + THREE_CHANCE
+
+	const WOOD_RATE = WOOD_CHANCE
+	const STONE_RATE = WOOD_CHANCE + STONE_CHANCE
+	const METAL_RATE = WOOD_CHANCE + STONE_CHANCE + METAL_CHANCE
+
+	let rssCountToMine
+	let rssNameToMine
+	rssNameAndCount()
+
+	function rssNameAndCount() {
+		rssCountToMine = rssCount() 
+		rssNameToMine = rssName()
+		setElementText("mineButton", "Mine " + rssCountToMine + " " + rssNameToMine + "")
+	}
+	
+
 	const skillPointsForMineLevel = [5, 8, 10, 13, 15, 20, 25, 30, 35, 50]
 	const skillPointsForBattleLevel = [3, 8, 15, 25, 38, 53, 71, 95]
 
@@ -25,28 +55,6 @@
 	updatePlayerStats()
 
 	let currentTurn = 1
-	
-	
-	const WOOD_CHANCE = 50
-	const STONE_CHANCE = 30
-	const METAL_CHANCE = 20
-
-	const ONE_CHANCE = 50
-	const TWO_CHANCE = 25
-	const THREE_CHANCE = 10
-
-	const MINE_CHANCE = 40
-	const LEVEL_BONUS = 5
-
-	
-
-	const ONE_RATE = ONE_CHANCE
-	const TWO_RATE = ONE_CHANCE + TWO_CHANCE
-	const THREE_RATE = ONE_CHANCE + TWO_CHANCE + THREE_CHANCE
-
-	const WOOD_RATE = WOOD_CHANCE
-	const STONE_RATE = WOOD_CHANCE + STONE_CHANCE
-	const METAL_RATE = WOOD_CHANCE + STONE_CHANCE + METAL_CHANCE
 
 	let woodLvl = 0
 	let stoneLvl = 0
@@ -69,12 +77,10 @@
 	function mine() {
 		alreadyMined = true
 		enableButton("mineButton", false)
-		let count = rssCountToMine() 
-		const name = rssName()
 		let mined = false
-		if (name == "wood") {
+		if (rssNameToMine == "wood") {
 			mined = isRssMined(skillLevel(woodLvl), woodBonusChance)
-		} else if (name == "stone") {
+		} else if (rssNameToMine == "stone") {
 			mined = isRssMined(skillLevel(stoneLvl), stoneBonusChance)
 		} else {
 			mined = isRssMined(skillLevel(metalLvl), metalBonusChance)
@@ -83,25 +89,25 @@
 
 		if (mined) {
 			if (wagonOwned == false) {
-				updateStatus('mined 1(' + count + ') ' + name)
-				count = 1
+				updateStatus('mined 1(' + rssCountToMine + ') ' + rssNameToMine)
+				rssCountToMine = 1
 			} else {
-				updateStatus('mined ' + count + ' ' + name)
+				updateStatus('mined ' + rssCountToMine + ' ' + rssNameToMine)
 			}
 			setStatusRed(false)
-			if (name == "wood") {
-				woodLvl += count
-				updateRss(name, wood += count)
-			} else if (name == "stone") {
-				stoneLvl += count
-				updateRss(name, stone += count)
+			if (rssNameToMine == "wood") {
+				woodLvl += rssCountToMine
+				updateRss(rssNameToMine, wood += count)
+			} else if (rssNameToMine == "stone") {
+				stoneLvl += rssCountToMine
+				updateRss(rssNameToMine, stone += rssCountToMine)
 			} else {
-				metalLvl += count
-				updateRss(name, metal += count)
+				metalLvl += rssCountToMine
+				updateRss(rssNameToMine, metal += rssCountToMine)
 			}
 			updateCraft()
 		} else {
-			updateStatus('failed to mine ' + count + ' ' + name)
+			updateStatus('failed to mine ' + rssCountToMine + ' ' + rssNameToMine)
 			setStatusRed(true)
 		}
 	}
@@ -123,7 +129,7 @@
 		}
 	}
 
-	function rssCountToMine() {
+	function rssCount() {
 		const generate = random(ONE_CHANCE + TWO_CHANCE + THREE_CHANCE) 
 		if (generate <= ONE_RATE) {
 			return 1
@@ -181,6 +187,8 @@
 	}
 
 	function endTurn() {
+		rssNameAndCount()
+		updateStatus("")
 		currentTurn++
 		updateTurn(currentTurn)
 		enableButton("mineButton", true)

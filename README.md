@@ -10,8 +10,7 @@ MINE,RSS:
 	+ fix mine bug (rss count is not udated)
 	+ fix craft bug (rss name wrong)
 	+ inventory
-
-	- show what you gonna mine
+	+ show what you gonna mine
 FIGHTING:
 	+ attack
 	+ hp (amount + regen)
@@ -56,6 +55,7 @@ MULTYPLAYER:
 DESIGN:
 	+ battle log
 	+ hearts
+	+ status update per turn
 
 	* show hp in percents
 	* disable use potion with max hp
@@ -67,4 +67,3 @@ DESIGN:
 		* mine
 		* battle
 	* UX
-	* status update per turn
