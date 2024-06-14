@@ -1,4 +1,4 @@
-let tools = [
+const tools = [
 	{	
 		name: 	"saw",
 		price: 	[3, 0, 0],
@@ -32,6 +32,20 @@ let tools = [
 		price: 	[2, 2, 2],
 		description: "you can mine more resources",
 		bonus: [0, 0, 0],
+		owned: false
+	}
+]
+
+const gears = [
+	{
+		name: 	"axe",
+		price: 	[4, 2, 1],
+		description: "axe will help you to fight mobs",
+		bonus: {
+			"bonusDamage": 50,
+			"critMultiplier": 0.25,
+			"critChance": 20
+		},
 		owned: false
 	}
 ]

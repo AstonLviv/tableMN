@@ -1,4 +1,4 @@
-let mobs = [
+const mobs = [
 	{	
 		name: 	"🕷️spider🕷️",
 		hp: 	4,

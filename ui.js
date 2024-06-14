@@ -110,24 +110,14 @@
 		for (tool of tools) {
 			if (tool.owned == true) continue
 
-			const descriptionElement = document.createElement("div")
-			descriptionElement.textContent = ' ' + tool.description
+			const toolElement = createCraftElement(tool)
+			craftElement.appendChild(toolElement)
+		}
+		for (gear of gears) {
+			if (gear.owned == true) continue
 
-			const buttonElement = document.createElement('button')
-			buttonElement.textContent = tool.name
-			buttonElement.onclick = (event) => {
-				craft(event.target.textContent)
-			}
-			buttonElement.disabled = !isEnoughtResources(tool.price)
-			
-			const toolPriceElement = document.createElement("div")
-			toolPriceElement.innerHTML = priceToString(tool.price)
-
-			craftElement.appendChild(buttonElement)
-			craftElement.appendChild(descriptionElement)
-			craftElement.appendChild(document.createElement('br'))
-			craftElement.appendChild(toolPriceElement)
-			craftElement.appendChild(document.createElement('br'))    		
+			const gearElement = createCraftElement(gear)
+			craftElement.appendChild(gearElement)
 		}
 	}
 
@@ -217,4 +207,27 @@
 			}
 		}
 		return result
+	}
+
+	function createCraftElement(item) {
+		const itemElement = document.createElement("div")
+		const descriptionElement = document.createElement("div")
+		descriptionElement.textContent = ' ' + item.description
+
+		const buttonElement = document.createElement('button')
+		buttonElement.textContent = item.name
+		buttonElement.onclick = (event) => {
+			craft(event.target.textContent)
+		}
+		buttonElement.disabled = !isEnoughtResources(item.price)
+		
+		const toolPriceElement = document.createElement("div")
+		toolPriceElement.innerHTML = priceToString(item.price)
+
+		itemElement.appendChild(buttonElement)
+		itemElement.appendChild(descriptionElement)
+		itemElement.appendChild(document.createElement('br'))
+		itemElement.appendChild(toolPriceElement)
+		itemElement.appendChild(document.createElement('br'))
+		return itemElement
 	}

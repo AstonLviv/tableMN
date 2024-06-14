@@ -21,6 +21,12 @@
 	const STONE_RATE = WOOD_CHANCE + STONE_CHANCE
 	const METAL_RATE = WOOD_CHANCE + STONE_CHANCE + METAL_CHANCE
 
+	let gearBonuses = {
+		"bonusDamage": 0,
+		"critMultiplier": 1.5,
+		"critChance": 5
+	}
+
 	let rssCountToMine
 	let rssNameToMine
 	rssNameAndCount()
@@ -174,6 +180,14 @@
 				wagonOwned = true
 			}
 		}
+		for (gear of gears) {
+			if (gear.name == name) {
+				consumeRss(gear.price)
+				gear.owned = true
+				updateCraft()
+				addBattleBonus(gear.bonus)
+			}
+		}
 		updateInventory()
 	}
 
@@ -253,7 +267,7 @@
 
 	function playerDamage() {
 		const playerDmg = random(PLAYER_DAMAGE)
-		const bonus = diceBonus + levelBonus
+		const bonus = diceBonus + levelBonus + gearBonuses.bonusDamage
 		let additionalDamage = Math.floor(bonus/100)
 		if (random(100) <= bonus % 100) {
 			additionalDamage += 1
@@ -263,6 +277,11 @@
 		} else {
 			log("you deal " + playerDmg + " damage to " + currentMob.name)
 		}
+		if (random(100) >= 100 - gearBonuses.critChance) {
+			const critDamage = Math.ceil(playerDmg * gearBonuses.critMultiplier)
+			log(currentMob.name + " deals crit " + critDamage)
+			return critDamage 
+		} 
 		return playerDmg + additionalDamage
 	}
 
@@ -345,4 +364,14 @@
 			}
 		}
 		return +levels.length-1
+	}
+	
+	function addBattleBonus(bonus) {
+		for (const key in bonus) {
+			if (gearBonuses.hasOwnProperty(key)){
+				gearBonuses[key] += bonus[key]
+			} else {
+				gearBonuses[key] = bonus[key]
+			}
+		} 
 	}
