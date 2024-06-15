@@ -36,17 +36,17 @@ FIGHTING:
 			+ helment
 			+ armour
 			+ boots
-
 	+ levels
-		- skills
-			- mining skills
-				- choice between 2 resoures
-				- +1 hp by wood
-				- 40% mining chance
-			- battle skills
-				- lvl1: reroll mob, lvl2: choice between 2 mobs
-				- 40% to batlle dice
-				- vampirism
+
+	- skills 
+		- mining skills
+			- reroll resources
+			- +1 hp by wood
+			- 40% mining chance
+		- battle skills
+			- lvl1: reroll mob, lvl2: choice between 2 mobs
+			- 40% to batlle dice
+			- vampirism
 MULTYPLAYER:
 	- multiplayer 
 	- players
@@ -60,7 +60,7 @@ DESIGN:
 	+ disable usables after death
 	
 	* show hp in percents
-	* images ffrom gpt
+	* images from gpt
 	* show battle result
 	* show xp to next LVL
 	* show LVLup info
