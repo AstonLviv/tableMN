@@ -134,6 +134,9 @@
 	}
 
 	function isEnoughtResources(price) {
+		if (typeof(price) != "object") {
+			alert("isEnoughtResources requires Array param, but got - " + typeof(price))
+		}
 		let result = true
 		if (wood < price[0]) {
 			return false
@@ -263,6 +266,5 @@
 //		if (random(100) <= bonus % 100) {
 //			additionalDamage += 1
 //		}
-		console.log("bonus = " + bonus + " addBomus = " + additionalDamage)
 		setElementText("damage", gearBonuses.minDamage + additionalDamage + "-" + (gearBonuses.maxDamage + additionalDamage))
 	}

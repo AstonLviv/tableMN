@@ -53,7 +53,8 @@
 			<div id="status"></div>
 			<button onclick="endTurn()">
 				end turn
-			</button> <br> 
+			</button>
+			<br> 
 			Turn:
 			<div id="turn">
 				1
@@ -80,6 +81,9 @@
 			<button onclick="fight()" id="fightButton">fight</button>
 		</div>
 		<div class="column" style="background-color:#fff;">
+			<button id="healButton" onclick="heal()">
+				Heal
+			</button>
     		<h2>HP:</h2>
     		<div id="hp"><br>
 			</div><br>
@@ -98,7 +102,11 @@
 		</div>
 	</div>
 	<dialog id="lvlUpDialog">
+		<h2>CONGRATULATIONS!<br> You got new level, select your skill</h2>
 		<p>Select skill:</p>
+		<div id="dialogButtons">
+			
+		</div>
 	</dialog>
 </body>
 </html>

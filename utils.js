@@ -23,3 +23,7 @@ function setElementText(id, text) {
 	const element = document.getElementById(id)
 	element.textContent = text
 }
+
+function clearElement(id) {
+	document.getElementById(id).innerHTML = ""
+}

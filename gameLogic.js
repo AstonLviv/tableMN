@@ -25,7 +25,7 @@ const STONE_RATE = WOOD_CHANCE + STONE_CHANCE
 const METAL_RATE = WOOD_CHANCE + STONE_CHANCE + METAL_CHANCE
 
 const skillPointsForMineLevel = [5, 8, 10, 13, 15, 20, 25, 30, 35, 50]
-const skillPointsForBattleLevel = [3, 8, 15, 25, 38, 53, 71, 95]
+const skillPointsForBattleLevel = [3, 5, 12, 20, 30, 38, 52, 68]
 
 const dialog = document.getElementById("lvlUpDialog")
 
@@ -65,7 +65,9 @@ let alreadyMined = false
 let rssCountToMine
 let rssNameToMine
 let alredyRerolled = false
+let alreadyHealed = false
 rssNameAndCount()
+showElement("healButton", miningSkills.heal == 1)
 
 function rssNameAndCount() {
 	rssCountToMine = rssCount() 
@@ -73,6 +75,7 @@ function rssNameAndCount() {
 	setElementText("mineButton", "Mine " + rssCountToMine + " " + rssNameToMine + "")
 	showElement("reroll", miningSkills.selectRss == 1 )
 	enableButton("reroll", !alredyRerolled && !alreadyMined)
+	
 }
 
 const battleInventory = {} 
@@ -127,6 +130,10 @@ function mine() {
 		if (rssNameToMine == "wood") {
 			woodLvl += rssCountToMine
 			updateRss(rssNameToMine, wood += rssCountToMine)
+			enableButton("healButton", 
+				isEnoughtResources([1, 0, 0]) && 
+				!alreadyHealed && 
+				playerHp != maxPlayerHp)
 		} else if (rssNameToMine == "stone") {
 			stoneLvl += rssCountToMine
 			updateRss(rssNameToMine, stone += rssCountToMine)
@@ -232,7 +239,13 @@ function endTurn() {
 	updatePlayerStats()
 	alreadyMined = false
 	alredyRerolled = false
+	alreadyHealed = false
 	enableButton("reroll", !alredyRerolled && !alreadyMined)
+	enableButton("healButton", 
+		isEnoughtResources([1, 0, 0]) && 
+		!alreadyHealed && 
+		playerHp != maxPlayerHp)
+	showElement("healButton", miningSkills.heal == 1)
 }
 
 function hit() {
@@ -375,18 +388,31 @@ function useLootItem(lootItem) {
 }
 
 function checkPlayerLevel() {
+	clearElement("dialogButtons")
 	const playerLvl = checkLevel(xp, skillPointsForBattleLevel)
 	maxPlayerHp = PLAYER_HP + +playerLvl + gearBonuses.maxHp
 	levelBonus = LEVEL_BATTLE_BONUS * +playerLvl
 	if (currentPlayerLvl != playerLvl) {
-		const buttonElement = document.createElement('button')
+		let buttonElement = document.createElement('button')
 		buttonElement.textContent = "reroll resource"
+		buttonElement.disabled = miningSkills.selectRss == 1
 		buttonElement.onclick = (event) => {
-			miningSkills.selectRss += 1
+			miningSkills.selectRss = 1
 			dialog.close()
 			currentPlayerLvl = playerLvl
 		}
-		dialog.appendChild(buttonElement)
+		document.getElementById("dialogButtons").appendChild(buttonElement)
+
+		buttonElement = document.createElement('button')
+		buttonElement.textContent = "heal"
+		buttonElement.disabled = miningSkills.heal == 1
+		buttonElement.onclick = (event) => {
+			miningSkills.heal = 1
+			dialog.close()
+			currentPlayerLvl = playerLvl
+		}
+		document.getElementById("dialogButtons").appendChild(buttonElement)
+
 		dialog.showModal()
 	}
 	return playerLvl
@@ -441,4 +467,14 @@ function reroll() {
 	alredyRerolled = true
 	rssNameAndCount()
 	
+}
+
+function heal() {
+	alreadyHealed = true
+	addPlayerHp(1)
+	consumeRss([1,0,0])
+	enableButton("healButton", 
+		!alreadyHealed && 
+		playerHp != maxPlayerHp &&
+		playerHp != maxPlayerHp)
 }
