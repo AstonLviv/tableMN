@@ -404,7 +404,9 @@ function checkPlayerLevel() {
 		buttonElement = createSkillButton("+30% to mine chance", miningSkills.miningChance)
 		document.getElementById("dialogButtons").appendChild(buttonElement)
 
-		dialog.showModal()
+		if (playerLvl <= Object.keys(miningSkills).length) {
+			dialog.showModal()
+		}
 	}
 	return playerLvl
 }

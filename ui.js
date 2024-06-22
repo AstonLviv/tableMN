@@ -273,9 +273,9 @@
 		const buttonElement = document.createElement('button')
 
 		buttonElement.textContent = text
-		buttonElement.disabled = skill == 1
+		buttonElement.disabled = miningSkills[skill] == 1
 		buttonElement.onclick = (event) => {
-			skill = 1
+			miningSkills[skill] = 1
 			dialog.close()
 			currentPlayerLvl = playerLvl
 		}
