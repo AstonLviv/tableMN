@@ -252,6 +252,7 @@ function hit() {
 	playerHit()
 	mobHit()
 	checkHP()
+	drawBattleInventory("battleInventoryInBattle")
 	round++
 }
 
@@ -303,7 +304,7 @@ function mobDamage() {
 
 function playerDamage() {
 	const damageRange = gearBonuses.maxDamage - gearBonuses.minDamage
-	const playerDmg = gearBonuses.minDamage + random(damageRange)
+	const playerDmg = gearBonuses.minDamage + random(damageRange + 1) - 1
 	const bonus = diceBonus + levelBonus + gearBonuses.bonusDamage
 	const crit = random(100) >= 100 - gearBonuses.critChance
 	let additionalDamage = Math.floor(bonus/100)
@@ -312,7 +313,7 @@ function playerDamage() {
 	}
 	if (crit) {
 		const critDamage = Math.ceil((playerDmg + additionalDamage) * gearBonuses.critMultiplier)
-		log("you deal " + critDamage + " damage to " + currentMob.name)
+		log("you deal " + critDamage + " CRIT damage to " + currentMob.name)
 		return critDamage
 	} else {
 		if (additionalDamage > 0) {

@@ -45,8 +45,8 @@
 			}
 			buttonElement.disabled = playerHp <= 0
 			if (item == "potion") {
-				buttonElement.disabled = playerHp == maxPlayerHp
-			}
+				buttonElement.disabled = playerHp == maxPlayerHp || playerHp < 1	
+			} 
 
 			battleInventoryElement.appendChild(buttonElement)
 			battleInventoryElement.appendChild(descriptionElement)
