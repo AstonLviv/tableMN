@@ -50,7 +50,7 @@ FIGHTING:
 				* lvl2: can heal 3 times per turn
 				* lvl3: can heal unless there are resources
 				* lvl4: full heal for [2,2,2]?
-			- 40% mining chance ? (mine additional resources?)
+			- 30% mining chance ? (mine additional resources?)
 				* lvl2: 70%
 				* lvl3: 100%s
 		- battle skills

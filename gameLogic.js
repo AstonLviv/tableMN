@@ -4,14 +4,15 @@ const PLAYER_HP = 5 //base 5
 const CRIT_CHANCE = 5
 const CRIT_MULTIPLIER = 1.5
 
-const WOOD_CHANCE = 50
-const STONE_CHANCE = 30
-const METAL_CHANCE = 20
+const WOOD_ROLL_CHANCE = 50
+const STONE_ROLL_CHANCE = 30
+const METAL_ROLL_CHANCE = 20
 
 const ONE_CHANCE = 50
 const TWO_CHANCE = 25
 const THREE_CHANCE = 10
 
+const MINING_SKILL_BONUS = 30
 const MINE_CHANCE = 40
 const LEVEL_BONUS = 5
 const LEVEL_BATTLE_BONUS = 15
@@ -20,9 +21,9 @@ const ONE_RATE = ONE_CHANCE
 const TWO_RATE = ONE_CHANCE + TWO_CHANCE
 const THREE_RATE = ONE_CHANCE + TWO_CHANCE + THREE_CHANCE
 
-const WOOD_RATE = WOOD_CHANCE
-const STONE_RATE = WOOD_CHANCE + STONE_CHANCE
-const METAL_RATE = WOOD_CHANCE + STONE_CHANCE + METAL_CHANCE
+const WOOD_RATE = WOOD_ROLL_CHANCE
+const STONE_RATE = WOOD_ROLL_CHANCE + STONE_ROLL_CHANCE
+const METAL_RATE = WOOD_ROLL_CHANCE + STONE_ROLL_CHANCE + METAL_ROLL_CHANCE
 
 const skillPointsForMineLevel = [5, 8, 10, 13, 15, 20, 25, 30, 35, 50]
 const skillPointsForBattleLevel = [3, 5, 12, 20, 30, 38, 52, 68]
@@ -154,7 +155,7 @@ function fight() {
 } 
 
 function rssName() {
-	const generate = random(WOOD_CHANCE + STONE_CHANCE + METAL_CHANCE)
+	const generate = random(WOOD_ROLL_CHANCE + STONE_ROLL_CHANCE + METAL_ROLL_CHANCE)
 	if (generate <= WOOD_RATE) {
 		return "wood"
 	} else if (generate <= STONE_RATE) {
@@ -179,9 +180,9 @@ function isRssMined(level, toolBonus) {
 	const chance = level * LEVEL_BONUS + diceBonus
 	diceBonus = 0
 	updatePlayerStats()
-	return random(100) <= (MINE_CHANCE + chance + toolBonus)
+	const mineChanceSkill = miningSkills.miningChance * MINING_SKILL_BONUS
+	return random(100) <= (MINE_CHANCE +  mineChanceSkill + chance + toolBonus)
 }
-
 function skillLevel(skill) {
 	return checkLevel(skill, skillPointsForMineLevel)
 }
@@ -394,24 +395,13 @@ function checkPlayerLevel() {
 	maxPlayerHp = PLAYER_HP + +playerLvl + gearBonuses.maxHp
 	levelBonus = LEVEL_BATTLE_BONUS * +playerLvl
 	if (currentPlayerLvl != playerLvl) {
-		let buttonElement = document.createElement('button')
-		buttonElement.textContent = "reroll resource"
-		buttonElement.disabled = miningSkills.selectRss == 1
-		buttonElement.onclick = (event) => {
-			miningSkills.selectRss = 1
-			dialog.close()
-			currentPlayerLvl = playerLvl
-		}
+		let buttonElement = createSkillButton("reroll resource", miningSkills.selectRss)
 		document.getElementById("dialogButtons").appendChild(buttonElement)
 
-		buttonElement = document.createElement('button')
-		buttonElement.textContent = "heal"
-		buttonElement.disabled = miningSkills.heal == 1
-		buttonElement.onclick = (event) => {
-			miningSkills.heal = 1
-			dialog.close()
-			currentPlayerLvl = playerLvl
-		}
+		buttonElement = createSkillButton("heal for 1 wood", miningSkills.heal)
+		document.getElementById("dialogButtons").appendChild(buttonElement)
+
+		buttonElement = createSkillButton("+30% to mine chance", miningSkills.miningChance)
 		document.getElementById("dialogButtons").appendChild(buttonElement)
 
 		dialog.showModal()
