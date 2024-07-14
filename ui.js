@@ -24,7 +24,7 @@
 		showElement("bonusInBattle", diceBonus > 0)
 		setElementText("diceBonusInBattle", diceBonus + "%")
 		showElement("bonus", diceBonus > 0)
-		setElementText("diceBonus", diceBonus + "%")
+		setElementText("diceBonus", diceBonus + BATTLE_DICE_BONUS * battleSkills.battleDice + "%")
 		enableButton("fightButton", playerHp > 0 && currentMob.hp > 0)
 		drawBattleInventory('battleInventory')
 		updateDamage()
@@ -63,7 +63,6 @@
 		const mobHpElement = document.createElement('div')
 		if (mob.hp > 0) {
 			mobHpElement.innerText = mobHpString(mob)
-
 		} else {
 			mobHpElement.innerText = "dead ):"
 		}
@@ -95,6 +94,7 @@
 		
 		drawMob(currentMob)
 		updatePlayerStats()
+		enableButton("rerollMob", false)
 	}
 
 	function updateRssSkill(rssName) {
@@ -269,7 +269,7 @@
 		setElementText("damage", gearBonuses.minDamage + additionalDamage + "-" + (gearBonuses.maxDamage + additionalDamage))
 	}
 
-	function createSkillButton(text, skill) {
+	function createSkillButton(text, skill, playerLvl) {
 		const buttonElement = document.createElement('button')
 
 		buttonElement.textContent = text

@@ -16,6 +16,7 @@ const MINING_SKILL_BONUS = 30
 const MINE_CHANCE = 40
 const LEVEL_BONUS = 5
 const LEVEL_BATTLE_BONUS = 15
+const BATTLE_DICE_BONUS = 50
 
 const ONE_RATE = ONE_CHANCE
 const TWO_RATE = ONE_CHANCE + TWO_CHANCE
@@ -49,6 +50,12 @@ const miningSkills = {
 	"heal": 0,
 	"miningChance": 0,
 }
+
+let battleSkills = {
+	"vampirism": 0,
+	"selectMob": 0,
+	"battleDice": 0,
+}
 let diceBonus = 0
 let levelBonus = 0
 
@@ -66,9 +73,11 @@ let alreadyMined = false
 let rssCountToMine
 let rssNameToMine
 let alredyRerolled = false
+let mobAlredyRerolled = false
 let alreadyHealed = false
 rssNameAndCount()
 showElement("healButton", miningSkills.heal == 1)
+showElement("rerollMob", battleSkills.selectMob == 1)
 
 function rssNameAndCount() {
 	rssCountToMine = rssCount() 
@@ -76,7 +85,6 @@ function rssNameAndCount() {
 	setElementText("mineButton", "Mine " + rssCountToMine + " " + rssNameToMine + "")
 	showElement("reroll", miningSkills.selectRss == 1 )
 	enableButton("reroll", !alredyRerolled && !alreadyMined)
-	
 }
 
 const battleInventory = {} 
@@ -229,6 +237,9 @@ function consumeRss(price) {
 }
 
 function endTurn() {
+	showElement("rerollMob", battleSkills.selectMob == 1)
+	mobAlredyRerolled = false
+	enableButton("rerollMob", true)
 	rssNameAndCount()
 	updateStatus("")
 	currentTurn++
@@ -276,6 +287,10 @@ function playerHit() {
 		const dmg = playerDamage()	
 		currentMob.hp -= dmg
 		setElementText("mobHpBattle", mobHpString(currentMob))
+		if (battleSkills.vampirism == 1) {
+			addPlayerHp(1)
+			log("drained 1 hp from " + currentMob.name)
+		}
 	}
 }
 
@@ -306,7 +321,7 @@ function mobDamage() {
 function playerDamage() {
 	const damageRange = gearBonuses.maxDamage - gearBonuses.minDamage
 	const playerDmg = gearBonuses.minDamage + random(damageRange + 1) - 1
-	const bonus = diceBonus + levelBonus + gearBonuses.bonusDamage
+	const bonus = diceBonus + levelBonus + gearBonuses.bonusDamage + battleSkills.battleDice * BATTLE_DICE_BONUS
 	const crit = random(100) >= 100 - gearBonuses.critChance
 	let additionalDamage = Math.floor(bonus/100)
 	if (random(100) <= bonus % 100) {
@@ -395,20 +410,22 @@ function checkPlayerLevel() {
 	maxPlayerHp = PLAYER_HP + +playerLvl + gearBonuses.maxHp
 	levelBonus = LEVEL_BATTLE_BONUS * +playerLvl
 	if (currentPlayerLvl != playerLvl) {
-		let buttonElement = createSkillButton("reroll resource", miningSkills.selectRss)
-		document.getElementById("dialogButtons").appendChild(buttonElement)
+		const dialogButtonsElement = document.getElementById("dialogButtons")
+		dialogButtonsElement.appendChild(
+			createSkillButton("reroll resource", "selectRss", +playerLvl)
+		)
+		dialogButtonsElement.appendChild(
+			createSkillButton("heal for 1 wood", "heal", +playerLvl)
+		)
+		dialogButtonsElement.appendChild(
+			createSkillButton("+30% to mine chance", "miningChance", +playerLvl)
+		)
 
-		buttonElement = createSkillButton("heal for 1 wood", miningSkills.heal)
-		document.getElementById("dialogButtons").appendChild(buttonElement)
-
-		buttonElement = createSkillButton("+30% to mine chance", miningSkills.miningChance)
-		document.getElementById("dialogButtons").appendChild(buttonElement)
-
-		if (playerLvl <= Object.keys(miningSkills).length) {
+		if (+playerLvl <= Object.keys(miningSkills).length) {
 			dialog.showModal()
 		}
 	}
-	return playerLvl
+	return +playerLvl
 }
 
 function checkLevel(skill, levels) {
@@ -459,7 +476,6 @@ function equip(text) {
 function reroll() {
 	alredyRerolled = true
 	rssNameAndCount()
-	
 }
 
 function heal() {
@@ -470,4 +486,12 @@ function heal() {
 		!alreadyHealed && 
 		playerHp != maxPlayerHp &&
 		playerHp != maxPlayerHp)
+}
+
+function rerollMob() {
+	mobAlredyRerolled = true
+	enableButton("rerollMob", false)
+	currentMob = randomMob()
+	drawMob(currentMob)
+	enableButton("fightButton", playerHp > 0 && currentMob.hp > 0)
 }
