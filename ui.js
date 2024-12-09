@@ -269,15 +269,26 @@
 		setElementText("damage", gearBonuses.minDamage + additionalDamage + "-" + (gearBonuses.maxDamage + additionalDamage))
 	}
 
-	function createSkillButton(text, skill, playerLvl) {
+	function createSkillButton(text, skill) {
 		const buttonElement = document.createElement('button')
 
 		buttonElement.textContent = text
-		buttonElement.disabled = miningSkills[skill] == 1
-		buttonElement.onclick = (event) => {
-			miningSkills[skill] = 1
-			dialog.close()
-			currentPlayerLvl = playerLvl
+		if (miningSkills.hasOwnProperty(skill) == true) {
+			buttonElement.disabled = miningSkills[skill] == 1
+			buttonElement.onclick = (event) => {
+				miningSkills[skill] = 1
+				dialog.close()
+				currentPlayerLvl ++
+			}
+		} else if (battleSkills.hasOwnProperty(skill) == true) {
+			buttonElement.disabled = battleSkills[skill] == 1
+			buttonElement.onclick = (event) => {
+				battleSkills[skill] = 1
+				dialog.close()
+				currentPlayerLvl ++
+			}
+		} else {
+			alert(skill + " - unknown skill")
 		}
 		return buttonElement
 	}	

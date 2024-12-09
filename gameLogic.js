@@ -411,18 +411,34 @@ function checkPlayerLevel() {
 	levelBonus = LEVEL_BATTLE_BONUS * +playerLvl
 	if (currentPlayerLvl != playerLvl) {
 		const dialogButtonsElement = document.getElementById("dialogButtons")
-		dialogButtonsElement.appendChild(
-			createSkillButton("reroll resource", "selectRss", +playerLvl)
-		)
-		dialogButtonsElement.appendChild(
-			createSkillButton("heal for 1 wood", "heal", +playerLvl)
-		)
-		dialogButtonsElement.appendChild(
-			createSkillButton("+30% to mine chance", "miningChance", +playerLvl)
-		)
-
-		if (+playerLvl <= Object.keys(miningSkills).length) {
-			dialog.showModal()
+		if (currentPlayerLvl % 2 == 1) { //odd
+			dialogButtonsElement.appendChild(
+				createSkillButton("reroll mob", "selectMob")
+			)
+			dialogButtonsElement.appendChild(
+				createSkillButton("heal for 1 hit", "vampirism")
+			)
+			dialogButtonsElement.appendChild(
+				createSkillButton("+30% to battle dice", "battleDice")
+			)
+	
+			if ((+playerLvl + 1) / 2 <= Object.keys(battleSkills).length) {
+				dialog.showModal()
+			}
+		} else { //even
+			dialogButtonsElement.appendChild(
+				createSkillButton("reroll resource", "selectMob")
+			)
+			dialogButtonsElement.appendChild(
+				createSkillButton("heal for 1 wood", "heal")
+			)
+			dialogButtonsElement.appendChild(
+				createSkillButton("+30% to mine chance", "miningChance")
+			)
+	
+			if (+playerLvl / 2 + 1 <= Object.keys(miningSkills).length) {
+				dialog.showModal()
+			}
 		}
 	}
 	return +playerLvl

@@ -40,7 +40,7 @@ const gears = [
 	{
 		name: 	"axe",
 		price: 	[4, 2, 1],
-		description: "will help you to fight mobs",
+		description: "add 1-2 dmg, 50% +1dmg, 0.2% crit with 0.25x",
 		bonus: {
 			"minDamage":1,
 			"maxDamage": 2,
@@ -54,7 +54,7 @@ const gears = [
 	{
 		name: 	"sword",
 		price: 	[4, 3, 3],
-		description: "will help you to fight mobs",
+		description: "add 2-2 dmg, 60% +1dmg, 0.1% crit with 0.4x",
 		bonus: {
 			"minDamage":2,
 			"maxDamage": 2,
@@ -68,7 +68,7 @@ const gears = [
 	{
 		name: 	"spear",
 		price: 	[5, 4, 4],
-		description: "will help you to fight mobs",
+		description: "add 1-2 dmg, 70% +1dmg, 0.15% crit with 0.3x",
 		bonus: {
 			"minDamage":1,
 			"maxDamage": 2,
@@ -82,7 +82,7 @@ const gears = [
 	{
 		name: 	"helmet",
 		price: 	[3, 6, 2],
-		description: "will help you to defend from mobs",
+		description: "max HP +3",
 		bonus: {
 			"maxHp": 3,
 		},
@@ -92,7 +92,7 @@ const gears = [
 	{
 		name: 	"armour",
 		price: 	[5, 5, 5],
-		description: "will help you to defend from mobs",
+		description: "max HP +5",
 		bonus: {
 			"maxHp": 5,
 		},
@@ -102,7 +102,7 @@ const gears = [
 	{
 		name: 	"pants",
 		price: 	[3, 4, 3],
-		description: "will help you to defend from mobs",
+		description: "max HP +4",
 		bonus: {
 			"maxHp": 4,
 		},
@@ -112,7 +112,7 @@ const gears = [
 	{
 		name: 	"boots",
 		price: 	[0, 0, 4],
-		description: "will help you to defend from mobs",
+		description: "max HP + 1",
 		bonus: {
 			"maxHp": 1,
 		},
