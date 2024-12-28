@@ -81,6 +81,8 @@
 		setElementText("playerHpBattle", playerHpString())
 		setElementText("mobHpBattle", mobHpString(mob))
 		setElementText("mobNameBattle", mob.name)
+		const element = document.getElementById("mobImg")
+		element.setAttribute('src', "./img/" + mob.name + ".png")
 
 		updateBattleButtons(true)
 		setElementText("log", "")
