@@ -3,7 +3,6 @@ const http = require('http');
 const socketIo = require('socket.io');
 //const WebSocket = require('ws');
 let ip = require('ip'); // to determine server ip
-const { setDefaultAutoSelectFamily } = require('net');
 
 const app = express();
 const server = http.createServer(app);

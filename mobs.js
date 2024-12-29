@@ -1,10 +1,11 @@
-let mobs = [
+const mobs = [
 	{	
 		name: 	"spider",
 		hp: 	4,
 		description: "a big spider that lives in a cave",
-		damage: 1,
-		maxDamage: 2,
+		minDamage: 1,
+		critChance: 10,
+		maxDamage: 1,
 		hitChance: 80,
 		xp: 1,
 		loot: [
@@ -29,8 +30,9 @@ let mobs = [
 		name: 	"zombie",
 		hp: 	8,
 		description: "a zombie that raise from a grave at night",
-		damage: 1,
-		maxDamage: 3,
+		minDamage: 1,
+		maxDamage: 2,
+		critChance: 10,
 		hitChance: 80,
 		xp: 3,
 		loot: [
@@ -55,17 +57,23 @@ let mobs = [
 				dice: 5
 			},
 			{
-				name: "dice and potion",
+				name: "dice",
 				value: 1,
 				dice: 6
-			}
+			},
+			{
+				name: "potion",
+				value: 1,
+				dice: 6
+			},
 		]	
 	},
 	{	
 		name: 	"skeleton",
 		hp: 	12,
 		description: "skeleton king raised this skeleton to defeat you",
-		damage: 2,
+		minDamage: 2,
+		critChance: 15,
 		maxDamage: 3,
 		hitChance: 80,
 		xp: 5,
@@ -91,12 +99,22 @@ let mobs = [
 				dice: 4
 			},
 			{
-				name: "dice and potion",
+				name: "dice",
 				value: 1,
 				dice: 5
 			},
 			{
-				name: "dice and potion",
+				name: "potion",
+				value: 1,
+				dice: 5
+			},
+			{
+				name: "dice",
+				value: 1,
+				dice: 6
+			},	
+			{
+				name: "potion",
 				value: 1,
 				dice: 6
 			}
@@ -106,8 +124,9 @@ let mobs = [
 		name: 	"blaze",
 		hp: 	20,
 		description: "a burning skeleton that can throw fireballs and fly",
-		damage: 3,
+		minDamage: 3,
 		maxDamage: 5, 
+		critChance: 10,
 		hitChance: 80,
 		xp: 20,
 		loot: [
@@ -132,23 +151,34 @@ let mobs = [
 				dice: 4
 			},
 			{
-				name: "dice and potion",
+				name: "potion",
 				value: 2,
 				dice: 5
 			},
 			{
-				name: "dice and potion",
+				name: "dice",
+				value: 2,
+				dice: 5
+			},
+			{
+				name: "dice",
+				value: 2,
+				dice: 6
+			},
+			{
+				name: "potion",
 				value: 2,
 				dice: 6
 			}
 		]	
 	},
 	{
-		name: 	"Skeleton King",
+		name: 	"lich",
 		hp: 	35,
 		description: "THE FINAL BOSS",
-		damage: 7,
-		maxDamage: 9,
+		minDamage: 5,
+		critChance: 15,
+		maxDamage: 7,
 		hitChance: 80,
 		xp: 50,
 		loot: [
@@ -168,17 +198,32 @@ let mobs = [
 				dice: 3
 			},
 			{
-				name: "dice and potion",
+				name: "dice",
 				value: 3,
 				dice: 4
 			},
 			{
-				name: "dice and potion",
+				name: "potion",
+				value: 3,
+				dice: 4
+			},
+			{
+				name: "dice",
 				value: 4,
 				dice: 5
 			},
 			{
-				name: "dice and potion",
+				name: "potion",
+				value: 4,
+				dice: 5
+			},
+			{
+				name: "dice",
+				value: 5,
+				dice: 6
+			},
+			{
+				name: "potion",
 				value: 5,
 				dice: 6
 			}
