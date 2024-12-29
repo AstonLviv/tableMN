@@ -1,0 +1,65 @@
+<form>
+  <input type="text" placeholder="Enter your message" id="message">
+  <button>Send</button>
+</form>
+<div id="messages"></div>
+
+<input type="text" placeholder="Enter your username" id="inputUsername">
+<button onclick="setUsername()">
+  Set username
+</button>
+
+<div id="players">
+
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  const socket = io();
+
+  // Send message when form is submitted
+  const form = document.querySelector('form');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const input = document.getElementById('message');
+    const message = input.value;
+    input.value = '';
+    socket.emit('chatMessage', message);
+  });
+
+  // Receive and display chat messages
+  socket.on('chatMessage', (message) => {
+    const messageElement = document.createElement('div');
+    messageElement.textContent = message;
+    document.querySelector('#messages').appendChild(messageElement);
+  }); 
+
+  socket.on("Players", (playersString) => {
+    const players = JSON.parse(playersString) 
+    const playersList = document.getElementById("players")
+    playersList.innerHTML = ""
+    players.forEach(element => {
+      playersList.innerHTML += playerName(element)
+      playersList.innerHTML += "<br>"
+    });
+
+    function playerName(player) {
+      let name = player.id
+      let exists = Object.keys(player).includes("username");
+      if (exists) {        
+        name = player.username        
+      }      
+      return name
+    }
+  });
+
+  function setUsername() {
+    const input = document.getElementById("inputUsername")
+    const username = input.value
+    input.value = ""
+    socket.emit('usernameMessage', username)
+  }
+
+
+</script>
+
