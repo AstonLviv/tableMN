@@ -57,6 +57,17 @@ io.on('connection', (socket) => {
     io.emit("chatMessage", `player: ${socket.data.id} gonna be known as: ${username}`);
   });
 
+  socket.on("createRoom", () => {
+    console.log("a room has been created")
+    const room = {
+      "id":roomId++,
+      "owner":socket.data.id,  
+      "players":[]
+    }
+    rooms.push(room)
+    sendRooms()
+  })
+
   socket.on('disconnect', () => {
     console.log('A user disconnected');
     setPlayerStatus(socket.data.id, "offline")
@@ -80,6 +91,8 @@ io.on('connection', (socket) => {
 
 //Lobby
 const players = []
+const rooms = []
+let roomId = 1
 
 function addNewPlayer(player) { 
     if (!checkPlayerExist(player)){
@@ -129,4 +142,8 @@ function playerName(id) {
 
 function sendPlayers() {
   io.emit("Players", JSON.stringify(players));
+}
+
+function sendRooms() {
+  io.emit("Rooms", JSON.stringify(rooms));
 }

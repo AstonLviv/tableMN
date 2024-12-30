@@ -79,7 +79,15 @@ MULTYPLAYER:
 	- multiplayer 
 	- players
 	- lan game
-
+	- lobby
+		- one player can create one room
+		- player can destroy own room
+		- player can see players in the room
+		- join room
+			- one player can join only one room
+			- in the room player can't create room
+		- owner can start game
+		- owner can kick players in the room	
 DESIGN:
 	+ battle log
 	+ hearts

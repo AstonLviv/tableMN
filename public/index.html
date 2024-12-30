@@ -1,17 +1,27 @@
 <form>
-  <input type="text" placeholder="Enter your message" id="message">
-  <button>Send</button>
+      <input type="text" placeholder="Enter your message" id="message">
+      <button>Send</button>
 </form>
-<div id="messages"></div>
-
+    <div id="messages">Chat</div>
 <input type="text" placeholder="Enter your username" id="inputUsername">
 <button onclick="setUsername()">
   Set username
 </button>
+<br>
+Players:
 
-<div id="players">
-
+<div id="players"></div>
 </div>
+
+Rooms:
+
+<div id="rooms">
+</div>
+
+<input type="text" placeholder="create room" id="createRoom">
+<button onclick="createRoom()">
+  create room
+</button>
 
 <script src="/socket.io/socket.io.js"></script>
 <script>
@@ -60,6 +70,21 @@
     socket.emit('usernameMessage', username)
   }
 
+  function createRoom() {
+    socket.emit("createRoom")
+  }
 
+  socket.on("Rooms", (roomsString) => {
+    console.log("hdfjihsgihdf")
+    const rooms = JSON.parse(roomsString) 
+    const roomsList = document.getElementById("rooms")
+    roomsList.innerHTML = ""
+    rooms.forEach(room => {
+      roomsList.innerHTML += room.id
+      roomsList.innerHTML += room.owner
+      roomsList.innerHTML += room.players
+      roomsList.innerHTML += "<br>"
+    })
+  });
+  
 </script>
-
