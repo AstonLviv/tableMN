@@ -40,7 +40,7 @@ const gears = [
 	{
 		name: 	"axe",
 		price: 	[4, 2, 1],
-		description: "add 1-2 dmg, 50% +1dmg, 0.2% crit with 0.25x",
+		description: "add 1-2 dmg, 50% +1dmg, 20% crit chance with multiplier 0.25x",
 		bonus: {
 			"minDamage":1,
 			"maxDamage": 2,
@@ -90,7 +90,7 @@ const gears = [
 		type: "armor_1",
 	},
 	{
-		name: 	"armour",
+		name: 	"armor",
 		price: 	[5, 5, 5],
 		description: "max HP +5",
 		bonus: {

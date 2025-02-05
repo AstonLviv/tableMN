@@ -6,179 +6,247 @@
 	<title></title>
 </head>
 <body>
-	
-	<div id='battle' style="display:none;">
-		<h2>BATTLE
-			INVENTORY:</h2>
-		<div id="battleInventoryInBattle"></div>
-		<button onclick="hit()" id="hitButton">
-			hit
-		</button>
-		<br>
-		<button onclick="endBattle()" id="endBattleButton">
-			end battle
-		</button><br>
-
-		<div class="column50" >
-			player hp:
-			<div id="playerHpBattle">
-
+	<div id="desktop" style="background-color: lightblue;">
+		<div id="main">
+			<div id="centerMenu">
+				<div id="flexRow">
+					<div>
+						<div style="flex-direction: column; width: 128px; word-wrap: break-word;">
+							<div id='mineText'></div><br>
+							<div id="status"></div><br>
+						</div>
+						<input type="image" id="mineButton" class='roundCorners' src="img/ui/pickaxe.png" width="64px" onclick="mine()"/>
+						<button onclick="reroll()" id="reroll" style="display: inline-block;">reroll</button>
+					</div>
+					<div>
+						<div id="fighting"></div><br>
+						<input type="image" id="fightButton" class='roundCorners' src="img/ui/attack.png" width="64px" onclick="fight()"/>
+						<button onclick="rerollMob()" id="rerollMob">reroll</button>
+					</div>
+					<div>
+						Turn:<br>
+						<div id="turn">1</div><br>
+						<input type="image" class='roundCorners' src="img/ui/hourglass.png" width="64px" onclick="endTurn()"/>
+					</div>
+				</div>
 			</div>
-			<div id="bonusInBattle"><br>
-				Bonus from dice:
 
-				<div id="diceBonusInBattle">
+			<div id="bottomMenu" style="background-color:#fff;">
+				<!-- <h2>INVENTORY:</h2> -->
+				<div id="inventory"></div>
+				<!-- <h2>BATTLE -->
+				<!-- INVENTORY:</h2> -->
+				<div id="battleInventory"></div>
+				<h2>equipment:</h2>
+				<div id="equipment"></div>
+			</div>
+
+			<div id="topMenu">
+				wood🪵:  <div id="wood">0</div>&emsp;&emsp;wood skill: <div id="woodSkill">0</div><br>
+				stone🪨: <div id="stone">0</div>&emsp;&emsp;stone skill: <div id="stoneSkill">0</div><br>
+				metal🪙: <div id="metal">0</div>&emsp;&emsp;metal skill: <div id="metalSkill">0</div><br><br>
+				<!-- <button onclick="mine()" id="mineButton">MINE</button> -->
+					<button id="healButton" onclick="heal()">Heal</button>
+					<!-- <h2>HP:</h2> -->
+					<div id="hp"></div><br>
+					damage:<div id="damage"></div>
+					<!-- <h2>XP:</h2> -->
+					<div id="xp">
+					</div>
+					<br>
+					<div id="bonus">BONUS:
+						<div id="diceBonus"></div>
+					</div>
+				</div>
+			</div>	
+
+			<div id="rightMenu">
+				<br>CRAFT:<br>
+				<div id="craft">
 				</div>
 			</div>
 		</div>
-		<div class="column502" >
-			<div id="mobNameBattle">
-				mob
-			</div>
-			<br><img id="mobImg" width="128">
-			hp:
-			<div id="mobHpBattle"></div>			
-			<br>
-			<div style="padding-left: 10px;">LOG:</div>
-			<div id="log"></div>
-		</div>
-	</div>
-	<div id="main">
-  		<div class="column" style="background-color:#fff;">
-  			wood🪵:  <div id="wood">0</div>&emsp;&emsp;wood skill: <div id="woodSkill">0</div><br>
-			stone🪨: <div id="stone">0</div>&emsp;&emsp;stone skill: <div id="stoneSkill">0</div><br>
-			metal🪙: <div id="metal">0</div>&emsp;&emsp;metal skill: <div id="metalSkill">0</div><br><br>
-			<button onclick="mine()" id="mineButton">MINE</button>
-			<button onclick="reroll()" id="reroll">reroll</button>
-			<br>
-			<div id="status"></div>
-			<button onclick="endTurn()">
-				end turn
-			</button>
-			<br> 
-			Turn:
-			<div id="turn">
-				1
-			</div>
-			
-			<br><br>CRAFT:<br>
-			<div id="craft">
-			</div>
-  		</div>
-  		<div class="column" style="background-color:#fff;">
-    		<h2>INVENTORY:</h2>
-			<div id="inventory">
-			</div>
+
+		<div id='battle' style="display:none;" class="desktop">
 			<h2>BATTLE
-			INVENTORY:</h2>
-			<div id="battleInventory"></div>
-    		<h2>equipment:</h2>
-			<div id="equipment"></div>
-  		</div>
-  		<div class="column" style="background-color:#fff;">
-    		<h2>MOBS:</h2>
-    		<div id="fighting">
-    		</div>
-			<button onclick="fight()" id="fightButton">fight</button>
-			<button onclick="rerollMob()" id="rerollMob">reroll</button>
-		</div>
-		<div class="column" style="background-color:#fff;">
-			<button id="healButton" onclick="heal()">
-				Heal
+				INVENTORY:</h2>
+			<div id="battleInventoryInBattle"></div>
+			<button onclick="hit()" id="hitButton">
+				hit
 			</button>
-    		<h2>HP:</h2>
-    		<div id="hp"><br>
-			</div><br>
-			damage:
-			<div id="damage"></div>
-			
-			<h2>XP:</h2>
-    		<div id="xp"><br>
+			<br>
+			<button onclick="endBattle()" id="endBattleButton">
+				end battle
+			</button><br>
+
+			<div class="column50" >
+				player hp:
+				<div id="playerHpBattle">
+
+				</div>
+				<div id="bonusInBattle"><br>
+					Bonus from dice:
+
+					<div id="diceBonusInBattle">
+					</div>
+				</div>
 			</div>
-			<div id="bonus">
-				BONUS:
-				<div id="diceBonus">
-					
+			<div class="column502" >
+				<div id="mobNameBattle">
+					mob
+				</div>
+				<br><img id="mobImg" width="128">
+				hp:
+				<div id="mobHpBattle"></div>			
+				<br>
+				<div style="padding-left: 10px;">LOG:</div>
+				<div id="log"></div>
+			</div>
+		</div>
+
+		<dialog id="lvlUpDialog">
+			<h2>CONGRATULATIONS!<br> You got new level, select your skill</h2>
+			<p>Select skill:</p>
+			<div id="dialogButtons">
+				
+			</div>
+		</dialog>
+	</div>
+
+
+	<div id="mobile">
+		<div id='battle' style="display:none;" class="desktop">
+			<h2>BATTLE
+				INVENTORY:</h2>
+			<div id="battleInventoryInBattle"></div>
+			<button onclick="hit()" id="hitButton">
+				hit
+			</button>
+			<br>
+			<button onclick="endBattle()" id="endBattleButton">
+				end battle
+			</button><br>
+
+			<div class="column50" >
+				player hp:
+				<div id="playerHpBattle">
+
+				</div>
+				<div id="bonusInBattle"><br>
+					Bonus from dice:
+
+					<div id="diceBonusInBattle">
+					</div>
+				</div>
+			</div>
+			<div class="column502" >
+				<div id="mobNameBattle">
+					mob
+				</div>
+				<br><img id="mobImg" width="128">
+				hp:
+				<div id="mobHpBattle"></div>			
+				<br>
+				<div style="padding-left: 10px;">LOG:</div>
+				<div id="log"></div>
+			</div>
+		</div>
+		<div id="main">
+			<div class="column" style="background-color:#fff;">
+				wood🪵:  <div id="wood">0</div>&emsp;&emsp;wood skill: <div id="woodSkill">0</div><br>
+				stone🪨: <div id="stone">0</div>&emsp;&emsp;stone skill: <div id="stoneSkill">0</div><br>
+				metal🪙: <div id="metal">0</div>&emsp;&emsp;metal skill: <div id="metalSkill">0</div><br><br>
+				<div id='mineText'></div>
+				<button onclick="mine()" id="mineButton">MINE</button>
+				<button onclick="reroll()" id="reroll">reroll</button>
+				<br>
+				<div id="status"></div>
+				<button onclick="endTurn()">
+					end turn
+				</button>
+				<br> 
+				Turn:
+				<div id="turn">
+					1
+				</div>
+				
+				<br><br>CRAFT:<br>
+				<div id="craft">
+				</div>
+			</div>
+			<div class="column" style="background-color:#fff;">
+				<h2>INVENTORY:</h2>
+				<div id="inventory">
+				</div>
+				<h2>BATTLE
+				INVENTORY:</h2>
+				<div id="battleInventory"></div>
+				<h2>equipment:</h2>
+				<div id="equipment"></div>
+			</div>
+			<div class="column" style="background-color:#fff;">
+				<h2>MOBS:</h2>
+				<div id="fighting">
+				</div>
+				<button onclick="fight()" id="fightButton">fight</button>
+				<button onclick="rerollMob()" id="rerollMob">reroll</button>
+			</div>
+			<div class="column" style="background-color:#fff;">
+				<button id="healButton" onclick="heal()">
+					Heal
+				</button>
+				<h2>HP:</h2>
+				<div id="hp"><br>
+				</div><br>
+				damage:
+				<div id="damage"></div>
+				
+				<h2>XP:</h2>
+				<div id="xp"><br>
+				</div>
+				<div id="bonus">
+					BONUS:
+					<div id="diceBonus">
+						
+					</div>
 				</div>
 			</div>
 		</div>
+		<dialog id="lvlUpDialog">
+			<h2>CONGRATULATIONS!<br> You got new level, select your skill</h2>
+			<p>Select skill:</p>
+			<div id="dialogButtons">
+				
+			</div>
+		</dialog>
 	</div>
-	<dialog id="lvlUpDialog">
-		<h2>CONGRATULATIONS!<br> You got new level, select your skill</h2>
-		<p>Select skill:</p>
-		<div id="dialogButtons">
-			
-		</div>
-	</dialog>
 </body>
 </html>
 
- 
-<style type="text/css">
-	div {
-		display: inline;
-	}
-	button {
-		width: 200px;
-		margin: 5px;
-		height: 50px;
-	}
-	* {
-	  box-sizing: border-box;
-	}
-	body {
-		font-size: larger;
-	}
-	.column {
-	  float: left;
-	  width: 25%;
-	  padding: 10px;
+<link rel='stylesheet' href='style.css'>
+<script> 
+	function isMobile() {
+		var result = /Mobile|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+		console.log(`is mobile: ${result}`);
+		return result;
 	}
 
-	.row:after {
-	  content: "";
-	  display: table;
-	  clear: both;
-	}
-	.floating {
-		position: relative;
-		width: 90%;
-		padding: 10px 5%;
-		background: white;
-		transition: all 1.3s ease;
-		animation: float 1.5s ease-in-out 0s infinite forwards;
-	}
-	.center {
-		text-align: center;
-	}
+	// Adjust visibility based on the user-agent
+	document.addEventListener('DOMContentLoaded', () => {
+		const mobileContent = document.getElementById('mobile');
+		const desktopContent = document.getElementById('desktop');
 
-	.column50 {
-		width: 50%;
-		padding: 10px;
-	}
-
-	.column502 {
-		width: 100%;
-		padding: 10px;
-	}
-
-	#log {
-		background-color: black;
-		color: rgb(2, 171, 2);
-	}
-	::backdrop {
-		background-image: linear-gradient(
-			45deg,
-			magenta,
-			rebeccapurple,
-			dodgerblue,
-			green
-		);
-		opacity: 0.75;
-	}
-</style>
-
-
+		if (isMobile()) {
+			mobileContent.style.display = 'block';
+			desktopContent.style.display = 'none';
+			desktopContent.parentNode.removeChild(desktopContent);
+		} else {
+			mobileContent.style.display = 'none';
+			desktopContent.style.display = 'block';
+			mobileContent.parentNode.removeChild(mobileContent);
+		}
+	});
+</script>
 <script type="text/javascript" src="mobs.js"></script>
 <script type="text/javascript" src="utils.js"></script>
 <script type="text/javascript" src="craft.js"></script>

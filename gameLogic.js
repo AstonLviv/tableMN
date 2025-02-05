@@ -82,7 +82,7 @@ showElement("rerollMob", battleSkills.selectMob == 1)
 function rssNameAndCount() {
 	rssCountToMine = rssCount() 
 	rssNameToMine = rssName()
-	setElementText("mineButton", "Mine " + rssCountToMine + " " + rssNameToMine + "")
+	setElementText("mineText", "You see " + rssCountToMine + " " + rssNameToMine + "")
 	showElement("reroll", miningSkills.selectRss == 1 )
 	enableButton("reroll", !alredyRerolled && !alreadyMined)
 }

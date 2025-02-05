@@ -210,13 +210,26 @@
 
 	function unitHpString(currentHp, maxHp) {
 		let result = currentHp + "/" + maxHp + "  "
-		for (let step = 1; step <= maxHp; step++) {
-			if (step <= currentHp) {
-				result += "❤️"
-			} else {
-				result += "🤍"
+		if (maxHp > 10) {
+			const percent = Math.floor(currentHp / maxHp) * 10
+			console.log("percent=" + percent + " current=" + currentHp + " max=" + maxHp);
+			for (let step = 1; step <= 10; step++) {
+				if (step <= percent) {
+					result += "❤️"
+				} else {
+					result += "🤍"
+				}
+			}
+		} else {
+			for (let step = 1; step <= maxHp; step++) {
+				if (step <= currentHp) {
+					result += "❤️"
+				} else {
+					result += "🤍"
+				}
 			}
 		}
+		
 		return result
 	}
 
