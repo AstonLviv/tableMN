@@ -6,7 +6,7 @@
 	<title></title>
 </head>
 <body>
-	<div id="desktop" style="background-color: lightblue;">
+	<div id="desktop">
 		<div id="main">
 			<div id="centerMenu">
 				<div id="flexRow">
@@ -20,6 +20,7 @@
 					</div>
 					<div>
 						<div id="fighting"></div><br>
+						<img id="mobPreview" class="round" width="128">
 						<input type="image" id="fightButton" class='roundCorners' src="img/ui/attack.png" width="64px" onclick="fight()"/>
 						<button onclick="rerollMob()" id="rerollMob">reroll</button>
 					</div>
@@ -31,37 +32,41 @@
 				</div>
 			</div>
 
-			<div id="bottomMenu" style="background-color:#fff;">
-				<!-- <h2>INVENTORY:</h2> -->
-				<div id="inventory"></div>
-				<!-- <h2>BATTLE -->
-				<!-- INVENTORY:</h2> -->
-				<div id="battleInventory"></div>
-				<h2>equipment:</h2>
-				<div id="equipment"></div>
+			<div id="bottomMenu" class="slideUp">
+				<input type="button" id="inventoryButton" onClick="showInventory()" value="/\"><br>
+				<div style="background-color:#ff5f5f;">
+					<!-- <h2>INVENTORY:</h2> -->
+					<div id="inventory"></div>
+					<!-- <h2>BATTLE -->
+					<!-- INVENTORY:</h2> -->
+					<div id="battleInventory"></div>
+					<h2>equipment:</h2>
+					<div id="equipment"></div>
+				</div>
 			</div>
 
-			<div id="topMenu">
+			<div id="topMenu" class="slideDown">
 				wood🪵:  <div id="wood">0</div>&emsp;&emsp;wood skill: <div id="woodSkill">0</div><br>
 				stone🪨: <div id="stone">0</div>&emsp;&emsp;stone skill: <div id="stoneSkill">0</div><br>
 				metal🪙: <div id="metal">0</div>&emsp;&emsp;metal skill: <div id="metalSkill">0</div><br><br>
 				<!-- <button onclick="mine()" id="mineButton">MINE</button> -->
-					<button id="healButton" onclick="heal()">Heal</button>
-					<!-- <h2>HP:</h2> -->
-					<div id="hp"></div><br>
-					damage:<div id="damage"></div>
-					<!-- <h2>XP:</h2> -->
-					<div id="xp">
-					</div>
-					<br>
-					<div id="bonus">BONUS:
-						<div id="diceBonus"></div>
-					</div>
+				<button id="healButton" onclick="heal()">Heal</button>
+				<!-- <h2>HP:</h2> -->
+				<div id="hp"></div><br>
+				damage:<div id="damage"></div>
+				<!-- <h2>XP:</h2> -->
+				<div id="xp">
 				</div>
+				<br>
+				<div id="bonus">BONUS:
+					<div id="diceBonus"></div>
+				</div>
+				<input type="button" id="statsButton" onClick="showStats()" style="margin-top: 30px;" value="\/">
 			</div>	
 
-			<div id="rightMenu">
-				<br>CRAFT:<br>
+			<div id="rightMenu" class="slideRight">
+				<!-- CRAFT: -->
+				<input type="button" id="craftButton" onClick="showCraft()" style="margin-left: -40px;" value="<<<">
 				<div id="craft">
 				</div>
 			</div>

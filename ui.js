@@ -66,6 +66,8 @@
 		} else {
 			mobHpElement.innerText = "dead ):"
 		}
+		const element = document.getElementById("mobPreview")
+		element.setAttribute('src', "./img/" + mob.name + ".png")
 		
 		mobElement.appendChild(document.createElement("br"))
 		const hpLabelElement = document.createElement('div')
