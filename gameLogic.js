@@ -511,33 +511,3 @@ function rerollMob() {
 	drawMob(currentMob)
 	enableButton("fightButton", playerHp > 0 && currentMob.hp > 0)
 }
-
-function showCraft() {
-	const rightMenu = document.getElementById('rightMenu')
-	rightMenu.classList.toggle("slideRight")
-	rightMenu.classList.toggle("slideLeft")
-
-	const button = document.getElementById('craftButton')
-	if (button.value == ">>>") 	button.value = "<<<"
-	else 						button.value = ">>>"
-}
-
-function showStats() {
-	const menu = document.getElementById('topMenu')
-	menu.classList.toggle("slideDown")
-	menu.classList.toggle("slideNone")
-
-	const button = document.getElementById('statsButton')
-	if (button.value == "/\\") 	button.value = "\\/"
-	else 						button.value = "/\\"
-}
-
-function showInventory() {
-	const menu = document.getElementById('bottomMenu')
-	menu.classList.toggle("slideUp")
-	menu.classList.toggle("slideNone")
-
-	const button = document.getElementById('inventoryButton')
-	if (button.value == "/\\") 	button.value = "\\/"
-	else 						button.value = "/\\"
-}

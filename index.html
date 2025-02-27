@@ -33,7 +33,8 @@
 			</div>
 
 			<div id="bottomMenu" class="slideUp">
-				<input type="button" id="inventoryButton" onClick="showInventory()" value="/\"><br>
+				<img id="invMenu" src="img/ui/up.png" onClick="showInventory()" style="width: 80px; margin-top: -80px;" class="round">
+				<!-- <input type="button" id="inventoryButton" onClick="showInventory()" value="/\"><br> -->
 				<div style="background-color:#ff5f5f;">
 					<!-- <h2>INVENTORY:</h2> -->
 					<div id="inventory"></div>
@@ -61,12 +62,13 @@
 				<div id="bonus">BONUS:
 					<div id="diceBonus"></div>
 				</div>
-				<input type="button" id="statsButton" onClick="showStats()" style="margin-top: 30px;" value="\/">
+				<img id="statsMenu" src="img/ui/down.png" onClick="showStats()" style="width: 80px;" class="round">
+
 			</div>	
 
 			<div id="rightMenu" class="slideRight">
 				<!-- CRAFT: -->
-				<input type="button" id="craftButton" onClick="showCraft()" style="margin-left: -40px;" value="<<<">
+				<img id="craftMenu" src="img/ui/left.png" onClick="showCraft()" style="margin-left: -80px; width: 80px;" class="round">
 				<div id="craft">
 				</div>
 			</div>
