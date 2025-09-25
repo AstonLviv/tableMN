@@ -43,6 +43,8 @@ FIGHTING:
 			+ boots
 	+ levels
 
+	+ fix right menu scolling with button
+
 	- draw battle inventory
 	- draw battle inventory (in battle with button "use")
 	- mob drop must going to BattleInventory

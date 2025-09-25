@@ -47,7 +47,7 @@
 				</div>
 			</div>
 
-			<div id="topMenu" class="slideDown">
+			<div id="topMenu" class="slideNone">
 				wood🪵:  <div id="wood">0</div>&emsp;&emsp;wood skill: <div id="woodSkill">0</div><br>
 				stone🪨: <div id="stone">0</div>&emsp;&emsp;stone skill: <div id="stoneSkill">0</div><br>
 				metal🪙: <div id="metal">0</div>&emsp;&emsp;metal skill: <div id="metalSkill">0</div><br><br>
@@ -64,15 +64,17 @@
 					<div id="diceBonus"></div>
 				</div>
 				<img id="statsMenu" src="img/ui/down.png" onClick="showStats()" style="width: 80px;" class="round">
-
 			</div>	
 
-			<div id="rightMenu" class="slideRight">
-				<!-- CRAFT: -->
-				<img id="craftMenu" src="img/ui/left.png" onClick="showCraft()" style="margin-left: -80px; width: 80px;" class="round">
-				<div id="craft">
+			<!-- CRAFT: -->
+			 <div id="craftContainer" class="slideRight">
+				<img id="craftMenu" src="img/ui/left.png" onClick="showCraft()" style="position:fixed; right: 400px; width: 80px;" class="round">
+				<div id="rightMenu">				
+					<div id="craft">
+					</div>
 				</div>
-			</div>
+			 </div>
+			
 		</div>
 
 		<div id='battle' style="display:none;" class="desktop">

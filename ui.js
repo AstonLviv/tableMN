@@ -311,13 +311,17 @@
 	}	
 
 	function showCraft() {
-		const menu = document.getElementById('rightMenu')
+		const menu = document.getElementById('craftContainer')
 		menu.classList.toggle("slideRight")
 		menu.classList.toggle("slideLeft")
 	
 		const menuImg = document.getElementById('craftMenu')
-		if (menu.classList.contains('slideRight')) 	menuImg.src = "img/ui/left.png"
-		else										menuImg.src = "img/ui/right.png"
+		if (menu.classList.contains('slideRight')) {
+			menuImg.src = "img/ui/left.png"
+		}
+		else {
+			menuImg.src = "img/ui/right.png"
+		}
 	}
 	
 	function showStats() {
@@ -326,8 +330,8 @@
 		menu.classList.toggle("slideNone")
 	
 		const menuImg = document.getElementById('statsMenu')
-		if (menu.classList.contains('slideNone')) 	menuImg.src = 'img/ui/up.png'
-		else										menuImg.src = 'img/ui/down.png'
+		if (menu.classList.contains('slideNone')) 	menuImg.src = 'img/ui/down.png'
+		else										menuImg.src = 'img/ui/up.png'
 	}
 	
 	function showInventory() {
