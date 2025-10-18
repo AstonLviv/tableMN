@@ -36,7 +36,7 @@
 			<div id="bottomMenu" class="slideUp">
 				<img id="invMenu" src="img/ui/up.png" onClick="showInventory()" style="width: 80px; margin-top: -80px;" class="round">
 				<!-- <input type="button" id="inventoryButton" onClick="showInventory()" value="/\"><br> -->
-				<div style="background-color:#ff5f5f;">
+				<div>
 					<!-- <h2>INVENTORY:</h2> -->
 					<div id="inventory"></div>
 					<!-- <h2>BATTLE -->
@@ -48,9 +48,9 @@
 			</div>
 
 			<div id="topMenu" class="slideNone">
-				wood🪵:  <div id="wood">0</div>&emsp;&emsp;wood skill: <div id="woodSkill">0</div><br>
-				stone🪨: <div id="stone">0</div>&emsp;&emsp;stone skill: <div id="stoneSkill">0</div><br>
-				metal🪙: <div id="metal">0</div>&emsp;&emsp;metal skill: <div id="metalSkill">0</div><br><br>
+				wood🪵:  <div id="wood">0</div>&emsp;&emsp;wood <div id="woodSkill">0</div><br>
+				stone🪨: <div id="stone">0</div>&emsp;&emsp;stone <div id="stoneSkill">0</div><br>
+				metal🪙: <div id="metal">0</div>&emsp;&emsp;metal <div id="metalSkill">0</div><br><br>
 				<!-- <button onclick="mine()" id="mineButton">MINE</button> -->
 				<button id="healButton" onclick="heal()">Heal</button>
 				<!-- <h2>HP:</h2> -->
@@ -78,9 +78,9 @@
 		</div>
 
 		<div id='battle' style="display:none;" class="desktop">
-			<h2>BATTLE
-				INVENTORY:</h2>
+			<h2>BATTLE INVENTORY:</h2>
 			<div id="battleInventoryInBattle"></div>
+			<br>
 			<button onclick="hit()" id="hitButton">
 				hit
 			</button>
@@ -163,9 +163,9 @@
 		</div>
 		<div id="main">
 			<div class="column" style="background-color:#fff;">
-				wood🪵:  <div id="wood">0</div>&emsp;&emsp;wood skill: <div id="woodSkill">0</div><br>
-				stone🪨: <div id="stone">0</div>&emsp;&emsp;stone skill: <div id="stoneSkill">0</div><br>
-				metal🪙: <div id="metal">0</div>&emsp;&emsp;metal skill: <div id="metalSkill">0</div><br><br>
+				wood🪵:  <div id="wood">0</div>&emsp;&emsp;wood <div id="woodSkill">0</div><br>
+				stone🪨: <div id="stone">0</div>&emsp;&emsp;stone <div id="stoneSkill">0</div><br>
+				metal🪙: <div id="metal">0</div>&emsp;&emsp;metal <div id="metalSkill">0</div><br><br>
 				<div id='mineText'></div>
 				<button onclick="mine()" id="mineButton">MINE</button>
 				<button onclick="reroll()" id="reroll">reroll</button>

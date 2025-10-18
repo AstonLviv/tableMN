@@ -20,7 +20,8 @@
 
 	function updatePlayerStats() {
 		setElementText("hp", playerHpString())
-		setElementText("xp", xp + "(" + checkPlayerLevel() + ")")
+		const level = checkPlayerLevel()
+		setElementText("xp", "experience: " + xp + "/" + totalExpForNextLvl(level, expForBattleLevel) + ", level: " + level)
 		showElement("bonusInBattle", diceBonus > 0)
 		setElementText("diceBonusInBattle", diceBonus + "%")
 		showElement("bonus", diceBonus > 0)
@@ -102,14 +103,28 @@
 	}
 
 	function updateRssSkill(rssName) {
+		let lvl = skillLevel(woodExp)
 		let element = document.getElementById("woodSkill")
-		element.innerHTML = skillLevel(woodLvl)
-
+		element.innerHTML = " experience: " + woodExp + "/" + totalExpForNextLvl(lvl, expForMineLevel) + ", level: " + skillLevel(woodExp) 
+		lvl = skillLevel(stoneExp)
 		element = document.getElementById("stoneSkill")
-		element.innerHTML = skillLevel(stoneLvl)
-
+		element.innerHTML = " experience: " + stoneExp + "/" + totalExpForNextLvl(lvl, expForMineLevel) +  ", level: " + skillLevel(stoneExp)
+		lvl = skillLevel(metalExp)
 		element = document.getElementById("metalSkill")
-		element.innerHTML = skillLevel(metalLvl)
+		element.innerHTML = " experience: " + metalExp + "/" + totalExpForNextLvl(lvl, expForMineLevel) + ", level: " + skillLevel(metalExp)
+	}
+
+	function totalExpForNextLvl(currentLevel, levels) {
+		let total = 0
+		for (idx in levels) {
+			if(idx > currentLevel) {
+				return total
+			}
+
+			total = total + levels[idx]
+			
+		}
+		return total
 	}
 
 	function updateCraft() {
@@ -283,7 +298,7 @@
 //		if (random(100) <= bonus % 100) {
 //			additionalDamage += 1
 //		}
-		setElementText("damage", gearBonuses.minDamage + additionalDamage + "-" + (gearBonuses.maxDamage + additionalDamage))
+		setElementText("damage", gearBonuses.minDamage + additionalDamage + "-" + (gearBonuses.maxDamage + additionalDamage) + ", ")
 	}
 
 	function createSkillButton(text, skill) {

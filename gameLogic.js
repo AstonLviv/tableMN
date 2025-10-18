@@ -26,8 +26,8 @@ const WOOD_RATE = WOOD_ROLL_CHANCE
 const STONE_RATE = WOOD_ROLL_CHANCE + STONE_ROLL_CHANCE
 const METAL_RATE = WOOD_ROLL_CHANCE + STONE_ROLL_CHANCE + METAL_ROLL_CHANCE
 
-const skillPointsForMineLevel = [5, 8, 10, 13, 15, 20, 25, 30, 35, 50]
-const skillPointsForBattleLevel = [3, 5, 12, 20, 30, 38, 52, 68]
+const expForMineLevel = [5, 8, 10, 13, 15, 20, 25, 30, 35, 50]
+const expForBattleLevel = [3, 5, 12, 20, 30, 38, 52, 68]
 
 const dialog = document.getElementById("lvlUpDialog")
 
@@ -97,9 +97,9 @@ let maxPlayerHp = PLAYER_HP
 let xp = 0
 let currentPlayerLvl = 0
 
-let woodLvl = 0
-let stoneLvl = 0
-let metalLvl = 0
+let woodExp = 0
+let stoneExp = 0
+let metalExp = 0
 
 let wagonOwned = false
 
@@ -121,11 +121,11 @@ function mine() {
 	enableButton("mineButton", false)
 	let mined = false
 	if (rssNameToMine == "wood") {
-		mined = isRssMined(skillLevel(woodLvl), woodBonusChance)
+		mined = isRssMined(skillLevel(woodExp), woodBonusChance)
 	} else if (rssNameToMine == "stone") {
-		mined = isRssMined(skillLevel(stoneLvl), stoneBonusChance)
+		mined = isRssMined(skillLevel(stoneExp), stoneBonusChance)
 	} else {
-		mined = isRssMined(skillLevel(metalLvl), metalBonusChance)
+		mined = isRssMined(skillLevel(metalExp), metalBonusChance)
 	}
 
 	if (mined) {
@@ -137,17 +137,17 @@ function mine() {
 		}
 		setStatusRed(false)
 		if (rssNameToMine == "wood") {
-			woodLvl += rssCountToMine
+			woodExp += rssCountToMine
 			updateRss(rssNameToMine, wood += rssCountToMine)
 			enableButton("healButton", 
 				isEnoughtResources([1, 0, 0]) && 
 				!alreadyHealed && 
 				playerHp != maxPlayerHp)
 		} else if (rssNameToMine == "stone") {
-			stoneLvl += rssCountToMine
+			stoneExp += rssCountToMine
 			updateRss(rssNameToMine, stone += rssCountToMine)
 		} else {
-			metalLvl += rssCountToMine
+			metalExp += rssCountToMine
 			updateRss(rssNameToMine, metal += rssCountToMine)
 		}
 		updateCraft()
@@ -191,8 +191,8 @@ function isRssMined(level, toolBonus) {
 	const mineChanceSkill = miningSkills.miningChance * MINING_SKILL_BONUS
 	return random(100) <= (MINE_CHANCE +  mineChanceSkill + chance + toolBonus)
 }
-function skillLevel(skill) {
-	return checkLevel(skill, skillPointsForMineLevel)
+function skillLevel(exp) {
+	return checkLevel(exp, expForMineLevel)
 }
 
 function addBonus(bonus) {
@@ -406,7 +406,7 @@ function useLootItem(lootItem) {
 
 function checkPlayerLevel() {
 	clearElement("dialogButtons")
-	const playerLvl = checkLevel(xp, skillPointsForBattleLevel)
+	const playerLvl = checkLevel(xp, expForBattleLevel)
 	maxPlayerHp = PLAYER_HP + +playerLvl + gearBonuses.maxHp
 	levelBonus = LEVEL_BATTLE_BONUS * +playerLvl
 	if (currentPlayerLvl != playerLvl) {
@@ -444,11 +444,11 @@ function checkPlayerLevel() {
 	return +playerLvl
 }
 
-function checkLevel(skill, levels) {
+function checkLevel(exp, levels) {
 	for (idx in levels) {
 		const n = levels[idx]
-		skill = skill - n 
-		if (skill < 0 ) {
+		exp = exp - n 
+		if (exp < 0 ) {
 			return idx
 		}
 	}
@@ -483,7 +483,7 @@ function equip(text) {
 			break
 		}
 	}
-	const playerLvl = checkLevel(xp, skillPointsForBattleLevel)
+	const playerLvl = checkLevel(xp, expForBattleLevel)
 	maxPlayerHp = PLAYER_HP + +playerLvl + gearBonuses.maxHp
 	updatePlayerStats()
 	updateEquipment()
