@@ -77,6 +77,9 @@ FIGHTING:
 				* lvl2: +1hp for every 4dmg dealt
 				* lvl3: +1hp for every 3dmg dealt
 		* add skill levels
+BUG FIXES:
+	- hearts of 16/20 is wrong (white not red)
+	- after pressing heal with wood hp isn't updating (main screen)
 MULTYPLAYER:
 	- multiplayer 
 	- players

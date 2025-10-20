@@ -198,5 +198,5 @@ input[type=image]:disabled {
     transition: 0.25s;
     transition-timing-function: ease-out;
     
-    transform: translateY(85%);
+    transform: translateY(100%);
 }
