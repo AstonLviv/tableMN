@@ -17,13 +17,13 @@
 							<div id="status"></div><br>
 						</div>
 						<input type="image" id="mineButton" class='roundCorners' src="img/ui/pickaxe.png" width="64px" onclick="mine()"/>
-						<button onclick="reroll()" id="reroll" style="display: inline-block;">reroll</button>
+						<button onclick="rssReroll()" id="rssReroll" style="display: inline-block;">resource reroll</button>
 					</div>
 					<div>
 						<div id="fighting"></div><br>
 						<img id="mobPreview" class="round" width="128">
 						<input type="image" id="fightButton" class='roundCorners' src="img/ui/attack.png" width="64px" onclick="fight()"/>
-						<button onclick="rerollMob()" id="rerollMob">reroll</button>
+						<button onclick="rerollMob()" id="rerollMob">reroll mob</button>
 					</div>
 					<div>
 						Turn:<br>
@@ -169,7 +169,7 @@
 				metal🪙: <div id="metal">0</div>&emsp;&emsp;metal <div id="metalSkill">0</div><br><br>
 				<div id='mineText'></div>
 				<button onclick="mine()" id="mineButton">MINE</button>
-				<button onclick="reroll()" id="reroll">reroll</button>
+				<button onclick="rssReroll()" id="rssReroll">reroll resource</button>
 				<br>
 				<div id="status"></div>
 				<button onclick="endTurn()">
@@ -200,7 +200,7 @@
 				<div id="fighting">
 				</div>
 				<button onclick="fight()" id="fightButton">fight</button>
-				<button onclick="rerollMob()" id="rerollMob">reroll</button>
+				<button onclick="rerollMob()" id="rerollMob">reroll mob</button>
 			</div>
 			<div class="column" style="background-color:#fff;">
 				<button id="healButton" onclick="heal()">

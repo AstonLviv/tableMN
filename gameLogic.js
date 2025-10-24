@@ -72,7 +72,7 @@ let metal = 0
 let alreadyMined = false
 let rssCountToMine
 let rssNameToMine
-let alredyRerolled = false
+let rssAlreadyRerolled = false
 let mobAlredyRerolled = false
 let alreadyHealed = false
 rssNameAndCount()
@@ -83,8 +83,8 @@ function rssNameAndCount() {
 	rssCountToMine = rssCount() 
 	rssNameToMine = rssName()
 	setElementText("mineText", "You see " + rssCountToMine + " " + rssNameToMine + "")
-	showElement("reroll", miningSkills.selectRss == 1 )
-	enableButton("reroll", !alredyRerolled && !alreadyMined)
+	showElement("rssReroll", miningSkills.selectRss == 1 )
+	enableButton("rssReroll", !rssAlreadyRerolled && !alreadyMined)
 }
 
 const battleInventory = {} 
@@ -117,7 +117,7 @@ function randomMob() {
 
 function mine() {
 	alreadyMined = true
-	enableButton("reroll", !alredyRerolled && !alreadyMined)
+	enableButton("rssReroll", false)
 	enableButton("mineButton", false)
 	let mined = false
 	if (rssNameToMine == "wood") {
@@ -250,9 +250,9 @@ function endTurn() {
 	addPlayerHp(1)
 	updatePlayerStats()
 	alreadyMined = false
-	alredyRerolled = false
+	rssAlreadyRerolled = false
 	alreadyHealed = false
-	enableButton("reroll", !alredyRerolled && !alreadyMined)
+	enableButton("rssReroll", true)
 	enableButton("healButton", 
 		isEnoughtResources([1, 0, 0]) && 
 		!alreadyHealed && 
@@ -427,7 +427,7 @@ function checkPlayerLevel() {
 			}
 		} else { //even
 			dialogButtonsElement.appendChild(
-				createSkillButton("reroll resource", "selectMob")
+				createSkillButton("reroll resource", "selectRss")
 			)
 			dialogButtonsElement.appendChild(
 				createSkillButton("heal for 1 wood", "heal")
@@ -489,8 +489,8 @@ function equip(text) {
 	updateEquipment()
 }
 
-function reroll() {
-	alredyRerolled = true
+function rssReroll() {
+	rssAlreadyRerolled = true
 	rssNameAndCount()
 }
 

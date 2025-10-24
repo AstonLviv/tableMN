@@ -78,8 +78,11 @@ FIGHTING:
 				* lvl3: +1hp for every 3dmg dealt
 		* add skill levels
 BUG FIXES:
-	- hearts of 16/20 is wrong (white not red)
+	+ hearts of 16/20 is wrong (white not red)
 	- after pressing heal with wood hp isn't updating (main screen)
+	- reroll rss rerolls mob
+	- gears description is incorrect (mismatch) in bottom menu
+	- bottom menu needs scroll
 MULTYPLAYER:
 	- multiplayer 
 	- players
