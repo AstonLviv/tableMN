@@ -211,11 +211,9 @@ function craft(name) {
 			updateCraft()
 			addBonus(tool.bonus)
 			alreadyFound = true
-			break
-		}
-		if (name == "wagon") {
-			wagonOwned = true
-			alreadyFound = true
+			if (name == "wagon") {
+				wagonOwned = true
+			}
 			break
 		}
 	}
