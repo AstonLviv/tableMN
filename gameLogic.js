@@ -78,14 +78,7 @@ let alreadyHealed = false
 rssNameAndCount()
 showElement("healButton", miningSkills.heal == 1)
 showElement("rerollMob", battleSkills.selectMob == 1)
-
-function rssNameAndCount() {
-	rssCountToMine = rssCount() 
-	rssNameToMine = rssName()
-	setElementText("mineText", "You see " + rssCountToMine + " " + rssNameToMine + "")
-	showElement("rssReroll", miningSkills.selectRss == 1 )
-	enableButton("rssReroll", !rssAlreadyRerolled && !alreadyMined)
-}
+updateInventory()
 
 const battleInventory = {} 
 
@@ -106,6 +99,14 @@ let wagonOwned = false
 updateCraft()
 drawMob(currentMob)
 updatePlayerStats()
+
+function rssNameAndCount() {
+	rssCountToMine = rssCount() 
+	rssNameToMine = rssName()
+	setElementText("mineText", "You see " + rssCountToMine + " " + rssNameToMine + "")
+	showElement("rssReroll", miningSkills.selectRss == 1 )
+	enableButton("rssReroll", !rssAlreadyRerolled && !alreadyMined)
+}
 
 function randomMob() {
 	const randomIndex = random(mobs.length)-1
@@ -202,25 +203,34 @@ function addBonus(bonus) {
 }
 
 function craft(name) {
+	let alreadyFound = false
 	for (tool of tools) {
 		if (tool.name == name) {
 			consumeRss(tool.price)
 			tool.owned = true
 			updateCraft()
 			addBonus(tool.bonus)
+			alreadyFound = true
+			break
 		}
 		if (name == "wagon") {
 			wagonOwned = true
+			alreadyFound = true
+			break
 		}
 	}
-	for (gear of gears) {
-		if (gear.name == name) {
-			consumeRss(gear.price)
-			gear.owned = true
-			updateCraft()
-			//addBattleBonus(gear.bonus)
+	if (!alreadyFound) {
+		for (gear of gears) {
+			if (gear.name == name) {
+				consumeRss(gear.price)
+				gear.owned = true
+				updateCraft()
+				break
+				//addBattleBonus(gear.bonus)
+			}
 		}
 	}
+	
 	updateInventory()
 }
 

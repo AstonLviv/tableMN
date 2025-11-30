@@ -132,7 +132,7 @@
 		const craftElement = document.getElementById('craft')
 		craftElement.innerHTML = ""
 		for (tool of tools) {
-			if (tool.owned == true) continue
+			if (tool.owned) continue
 
 			const toolElement = createCraftElement(tool)
 			craftElement.appendChild(toolElement)
@@ -174,7 +174,7 @@
 		const inventElement = document.getElementById('inventory')
 		inventElement.innerHTML = ""
 		for (tool of tools) {
-			if (tool.owned == false) continue
+			if (!tool.owned) continue
 
 			const descriptionElement = document.createElement("div")
 			descriptionElement.textContent = ' ' + tool.description
@@ -184,10 +184,10 @@
 
 			inventElement.appendChild(nameElement)
 			inventElement.appendChild(descriptionElement)
-			inventElement.appendChild(document.createElement('br'))    		
+			inventElement.appendChild(document.createElement('br'))
 		}
 		for (gear of gears) {
-			if (gear.owned == false) continue
+			if (!gear.owned) continue
 			
 			const descriptionElement = document.createElement("div")
 			descriptionElement.textContent = ' ' + gear.description
@@ -201,11 +201,10 @@
 				equip(event.target.textContent)
 			}
 	//		buttonElement.disabled = !isEnoughtResources(item.price)
-
+			inventElement.appendChild(document.createElement('br'))
+			inventElement.appendChild(buttonElement)
 			inventElement.appendChild(nameElement)
-			inventElement.appendChild(descriptionElement)
-			inventElement.appendChild(document.createElement('br')) 
-			inventElement.appendChild(buttonElement)   		
+			inventElement.appendChild(descriptionElement)   		
 		}
 	}
 	
