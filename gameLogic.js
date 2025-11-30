@@ -139,10 +139,7 @@ function mine() {
 		if (rssNameToMine == "wood") {
 			woodExp += rssCountToMine
 			updateRss(rssNameToMine, wood += rssCountToMine)
-			enableButton("healButton", 
-				isEnoughtResources([1, 0, 0]) && 
-				!alreadyHealed && 
-				playerHp != maxPlayerHp)
+			showHealButton()
 		} else if (rssNameToMine == "stone") {
 			stoneExp += rssCountToMine
 			updateRss(rssNameToMine, stone += rssCountToMine)
@@ -253,11 +250,7 @@ function endTurn() {
 	rssAlreadyRerolled = false
 	alreadyHealed = false
 	enableButton("rssReroll", true)
-	enableButton("healButton", 
-		isEnoughtResources([1, 0, 0]) && 
-		!alreadyHealed && 
-		playerHp != maxPlayerHp)
-	showElement("healButton", miningSkills.heal == 1)
+	showHealButton()
 }
 
 function hit() {
@@ -498,10 +491,8 @@ function heal() {
 	alreadyHealed = true
 	addPlayerHp(1)
 	consumeRss([1,0,0])
-	enableButton("healButton", 
-		!alreadyHealed && 
-		playerHp != maxPlayerHp &&
-		playerHp != maxPlayerHp)
+	showHealButton()
+	updatePlayerStats()
 }
 
 function rerollMob() {

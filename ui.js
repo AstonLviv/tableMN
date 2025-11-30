@@ -100,6 +100,7 @@
 		drawMob(currentMob)
 		updatePlayerStats()
 		enableButton("rerollMob", false)
+		showHealButton()
 	}
 
 	function updateRssSkill(rssName) {
@@ -357,4 +358,12 @@
 		const menuImg = document.getElementById('invMenu')
 		if (menu.classList.contains('slideNone')) 	menuImg.src = 'img/ui/down.png'
 		else										menuImg.src = 'img/ui/up.png'
+	}
+
+	function showHealButton() {
+		enableButton("healButton", 
+			isEnoughtResources([1, 0, 0]) && 
+			!alreadyHealed && 
+			playerHp != maxPlayerHp)
+		showElement("healButton", miningSkills.heal == 1)
 	}

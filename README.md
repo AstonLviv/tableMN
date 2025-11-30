@@ -79,7 +79,7 @@ FIGHTING:
 		* add skill levels
 BUG FIXES:
 	+ hearts of 16/20 is wrong (white not red)
-	- after pressing heal with wood hp isn't updating (main screen)
+	+ after pressing heal with wood hp isn't updating (main screen)
 	+ reroll rss rerolls mob
 	- gears description is incorrect (mismatch) in bottom menu
 	- bottom menu needs scroll
