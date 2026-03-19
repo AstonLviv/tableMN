@@ -35,6 +35,7 @@ io.on('connection', (socket) => {
   }
   console.log('A user connected ' + socket.data.id);
   addNewPlayer({"id": socket.data.id})
+  setPlayerStatus(socket.data.id, "online")
   console.log(players)
   sendPlayers()
 

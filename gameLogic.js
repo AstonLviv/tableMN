@@ -61,8 +61,10 @@ let levelBonus = 0
 
 const equipment = {
 	"weapon": {},
-	"armor": {},
-	"helmet": {},
+	"armor_1": {},
+	"armor_2": {},
+	"armor_3": {},
+	"armor_4": {},
 }
 
 let wood = 0
@@ -488,6 +490,7 @@ function equip(text) {
 	maxPlayerHp = PLAYER_HP + +playerLvl + gearBonuses.maxHp
 	updatePlayerStats()
 	updateEquipment()
+	updateInventory()
 }
 
 function rssReroll() {

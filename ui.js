@@ -189,6 +189,12 @@
 		for (gear of gears) {
 			if (!gear.owned) continue
 			
+			console.log(gear.type)
+			const equippedGear = equipment[gear.type]
+			console.log(equippedGear)
+			if (equippedGear.hasOwnProperty("name") && gear.name == equippedGear.name) continue
+			
+			
 			const descriptionElement = document.createElement("div")
 			descriptionElement.textContent = ' ' + gear.description
 
@@ -350,7 +356,7 @@
 	}
 	
 	function showInventory() {
-		const menu = document.getElementById('bottomMenu')
+		const menu = document.getElementById('bottomMenuContainer')
 		menu.classList.toggle("slideUp")
 		menu.classList.toggle("slideNone")
 		

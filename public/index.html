@@ -10,7 +10,7 @@
 <br>
 Players:
 
-<div id="players"></div>
+<div id="players">
 </div>
 
 Rooms:
@@ -50,6 +50,7 @@ Rooms:
     playersList.innerHTML = ""
     players.forEach(element => {
       playersList.innerHTML += playerName(element)
+      playersList.innerHTML += ' - ' + playerStatus(element)
       playersList.innerHTML += "<br>"
     });
 
@@ -60,6 +61,16 @@ Rooms:
         name = player.username        
       }      
       return name
+    }
+
+     function playerStatus(player) {
+      let status = 'status unknown'
+      //let status = player.status
+      let exists = Object.keys(player).includes("status");
+      if (exists) {        
+        status = player.status
+      }      
+      return status
     }
   });
 

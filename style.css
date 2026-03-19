@@ -1,7 +1,17 @@
 
 body {
-    font: sans-serif;
+    font: sans-serif;    
+    background-image: url('img/ui/bg.png'); 
+    
+    /* Recommended properties for control: */
+    
+    background-repeat: no-repeat;    
+    background-size: cover;
+    background-attachment: fixed; 
+    background-position: center; 
 }
+
+
 #flexRow {
     display: flex;
     flex-direction: row;
@@ -18,6 +28,7 @@ input[type=image] {
     display:inline-block;
 }
 #centerMenu {
+    background-color: rgba(255, 255, 255, 0.3);
     position: fixed;
     top: 50%;
     left: 50%;
@@ -29,7 +40,7 @@ input[type=image] {
     /* margin: 0 auto; */
     transform: translate(-50%, -50%);
 }
-#bottomMenu {
+#bottomMenuContainer {
     position: fixed;
     bottom: 0px;
     width: 100%;
@@ -38,8 +49,15 @@ input[type=image] {
     margin-left: -150px;
     width: 250px;
     height: 250px; */
-    /* background-color: yellow; */
+    background-color: rgba(0, 255, 255, 0.3); 
     /* margin: 0 auto; */
+}
+#bottomMenuScroll {
+    position: fixed;
+    width: 125%;
+    height: calc(100% - 25px); 
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 #topMenu {
     font-size: xx-large;
@@ -51,7 +69,7 @@ input[type=image] {
     margin-left: -150px;
     width: 250px;
     height: 250px; */
-    /* background-color: rgb(255, 0, 0); */
+    background-color: rgba(0, 255, 255, 0.3);
     /* margin: 0 auto; */
     /* display: none; */
 }
@@ -60,7 +78,6 @@ input[type=image] {
     right: 0px;
     width: 400px;
     height: 100%;
-    background-color: rgb(225, 22, 56);
 }
 
 #rightMenu {
@@ -68,7 +85,7 @@ input[type=image] {
     right: 0px;
     width: 400px;
     height: 100%;
-    background-color: lightcyan;
+    background-color: rgba(0, 255, 255, 0.5);
     overflow-x: hidden;
     overflow-y: auto;
 }     
