@@ -276,6 +276,7 @@ function checkHP() {
 		playerHp = 0
 		updateBattleButtons(false)
 	} else if (currentMob.hp <= 0) {
+		document.getElementById("mobImg").classList.add("disabled")
 		xp += currentMob.xp
 		checkPlayerLevel()
 		loot(currentMob)

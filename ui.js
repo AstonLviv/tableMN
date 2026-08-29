@@ -62,10 +62,13 @@
 		nameElement.innerText = mob.name
 		mobElement.appendChild(nameElement)
 		const mobHpElement = document.createElement('div')
+		enableButton("mobPreview", mob.hp > 0)
 		if (mob.hp > 0) {
 			mobHpElement.innerText = mobHpString(mob)
-		} else {
+			document.getElementById("mobPreview").classList.remove("disabled")
+		} else {			
 			mobHpElement.innerText = "dead ):"
+			document.getElementById("mobPreview").classList.add("disabled")
 		}
 		const element = document.getElementById("mobPreview")
 		element.setAttribute('src', "./img/" + mob.name + ".png")
@@ -86,6 +89,7 @@
 		setElementText("mobNameBattle", mob.name)
 		const element = document.getElementById("mobImg")
 		element.setAttribute('src', "./img/" + mob.name + ".png")
+		element.classList.remove("disabled")
 
 		updateBattleButtons(true)
 		setElementText("log", "")
