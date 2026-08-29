@@ -1,10 +1,11 @@
 [Try me](https://AstonLviv.github.io/tableMN)
-
+TO-DO:
+	- change sliding menu colors to white
+	- upper menu background size
+	- font too small and needs to be changed
 
 # tableMN
 BUG FIXES:
-	- after pressing equip bug
-	- bottom menu needs scroll
 	- gears
 	- level
 	- skills
